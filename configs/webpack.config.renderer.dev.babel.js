@@ -240,6 +240,7 @@ export default merge.smart(baseConfig, {
   devServer: {
     port,
     publicPath,
+    disableHostCheck: true,
     compress: true,
     noInfo: true,
     stats: 'errors-only',

@@ -42,6 +42,22 @@
     "promise/always-return": "error",
     "promise/catch-or-return": "error",
     "promise/no-native": "off",
+    "prefer-destructuring": [
+      "error",
+      {
+        "VariableDeclarator": {
+          "array": false,
+          "object": false
+        },
+        "AssignmentExpression": {
+          "array": false,
+          "object": false
+        }
+      },
+      {
+        "enforceForRenamedProperties": false
+      }
+    ],
     "react/sort-comp": [
       "error",
       {
