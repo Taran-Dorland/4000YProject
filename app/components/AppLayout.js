@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import FileUploadForm from '../components/FileUploadForm';
+import { Link } from 'react-router-dom';
+import routes from '../constants/routes';
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 
 type Props = {};
@@ -8,7 +9,7 @@ type Props = {};
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-export default class SideBar extends Component<Props> {
+export default class AppLayout extends Component<Props> {
   props: Props;
 
   state = {
@@ -37,6 +38,7 @@ export default class SideBar extends Component<Props> {
             <Menu.Item key="1">
               <Icon type="pie-chart" />
               <span>Option 1</span>
+              <Link to={routes.COUNTER}>to Counter</Link>
             </Menu.Item>
             <Menu.Item key="2">
               <Icon type="desktop" />
@@ -80,8 +82,7 @@ export default class SideBar extends Component<Props> {
               <Breadcrumb.Item>User</Breadcrumb.Item>
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
             </Breadcrumb>
-            <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-              <FileUploadForm />
+            <div className="test123" style={{ padding: 24, background: '#fff', minHeight: 360 }}>
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
