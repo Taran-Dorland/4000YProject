@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import FileUploadForm from '../components/FileUploadForm';
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 
 type Props = {};
@@ -14,10 +15,18 @@ export default class SideBar extends Component<Props> {
     collapsed: false,
   };
 
+  //Handles the responsive sidebar
   onCollapse = collapsed => {
     console.log(collapsed);
     this.setState({ collapsed });
   };
+
+  /*
+    Docs for Antd Layouts: https://ant.design/components/layout/
+
+    Summary:  Renders the app layout, including the sidebar. Also loads the FileUploadForm component
+              into the a div displayed on the main page.
+  */
 
   render() {
     return (
@@ -71,7 +80,9 @@ export default class SideBar extends Component<Props> {
               <Breadcrumb.Item>User</Breadcrumb.Item>
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
             </Breadcrumb>
-            <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>Bill is a cat.</div>
+            <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+              <FileUploadForm />
+            </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
         </Layout>
