@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import routes from '../constants/routes';
-import FileUploadForm from '../components/FileUploadForm';
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 
 type Props = {};
@@ -10,7 +9,7 @@ type Props = {};
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-export default class HomePage extends Component<Props> {
+export default class AppLayout extends Component<Props> {
   props: Props;
 
   state = {
@@ -38,13 +37,12 @@ export default class HomePage extends Component<Props> {
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1">
               <Icon type="pie-chart" />
-              <span>With form</span>
-              <Link to={routes.HOME}></Link>
+              <span>Option 1</span>
+              <Link to={routes.COUNTER}>to Counter</Link>
             </Menu.Item>
             <Menu.Item key="2">
               <Icon type="desktop" />
-              <span>Without form</span>
-              <Link to={routes.COUNTER}></Link>
+              <span>Option 2</span>
             </Menu.Item>
             <SubMenu
               key="sub1"
@@ -85,7 +83,6 @@ export default class HomePage extends Component<Props> {
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
             </Breadcrumb>
             <div className="test123" style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-              <FileUploadForm />
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
