@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import routes from '../constants/routes';
 import FileUploadForm from '../components/FileUploadForm';
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { PageHeader, Layout, Menu, Breadcrumb, Icon } from 'antd';
 
 type Props = {};
 
@@ -65,7 +65,7 @@ export default class ExportPage extends Component<Props> {
         </Sider>
         <Layout>
           <Header style={{ background: '#fff', padding: 0 }}>
-              <h1>Export Page</h1>
+              <PageHeader title="Export Page" subTitle="Save Data" />
           </Header>
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -75,7 +75,7 @@ export default class ExportPage extends Component<Props> {
             <div className="test123" style={{ padding: 24, background: '#fff', minHeight: 360 }}>
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+          <Footer style={{ textAlign: 'center' }}>This is a footer</Footer>
         </Layout>
       </Layout>
     );

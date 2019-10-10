@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import routes from '../constants/routes';
-import FileUploadForm from '../components/FileUploadForm';
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import TableDisplay from '../components/TableDisplay';
+import { PageHeader, Layout, Menu, Breadcrumb, Icon } from 'antd';
 
 type Props = {};
 
@@ -65,7 +65,7 @@ export default class TablePage extends Component<Props> {
         </Sider>
         <Layout>
           <Header style={{ background: '#fff', padding: 0 }}>
-              <h1>Table Page</h1>
+            <PageHeader title="Table Page" subTitle="View Data" />
           </Header>
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -73,9 +73,10 @@ export default class TablePage extends Component<Props> {
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
             </Breadcrumb>
             <div className="test123" style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+              <TableDisplay />
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+          <Footer style={{ textAlign: 'center' }}>This is a footer</Footer>
         </Layout>
       </Layout>
     );
