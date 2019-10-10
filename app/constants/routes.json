@@ -1,4 +1,7 @@
 {
   "HOME": "/",
-  "COUNTER": "/counter"
+  "GRAPH": "/counter",
+  "TABLE": "/table",
+  "EXPORT": "/export",
+  "SETTINGS": "/setting"
 }

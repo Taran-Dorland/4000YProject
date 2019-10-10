@@ -10,7 +10,7 @@ type Props = {};
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-export default class HomePage extends Component<Props> {
+export default class ExportPage extends Component<Props> {
   props: Props;
 
   state = {
@@ -35,7 +35,7 @@ export default class HomePage extends Component<Props> {
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
           <div className="logo" />
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+          <Menu theme="dark" defaultSelectedKeys={['4']} mode="inline">
             <Menu.Item key="1">
               <Icon type="home" />
               <span>Home</span>
@@ -65,7 +65,7 @@ export default class HomePage extends Component<Props> {
         </Sider>
         <Layout>
           <Header style={{ background: '#fff', padding: 0 }}>
-            <h1>Home Page</h1>
+              <h1>Export Page</h1>
           </Header>
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
@@ -73,7 +73,6 @@ export default class HomePage extends Component<Props> {
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
             </Breadcrumb>
             <div className="test123" style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-              <FileUploadForm />
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>

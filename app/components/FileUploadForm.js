@@ -49,7 +49,7 @@ class FileUploadForm extends Component<Props> {
                     valuePropName: 'fileList',
                     getValueFromEvent: this.normFile,
                 })(
-            <Upload name="logo" action="/upload.do" listType="picture">
+            <Upload name="logo" action="/upload.do" listType="picture" accept=".csv">
               <Button>
                 <Icon type="upload" /> Select a file
               </Button>
