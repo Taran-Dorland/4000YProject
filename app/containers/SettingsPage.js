@@ -1,4 +1,7 @@
-// @flow
+/*
+  Summary:  A page that will be used to customize settings in
+            the app.
+*/
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import routes from '../constants/routes';

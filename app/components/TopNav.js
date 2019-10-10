@@ -1,4 +1,9 @@
-// @flow
+/*
+  Docs for Antd nav: https://ant.design/components/menu/
+
+  Summary:  A placeholder function to swap between different charts to
+            display the imported data
+*/
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import routes from '../constants/routes';

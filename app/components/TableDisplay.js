@@ -1,4 +1,9 @@
-// @flow
+/*
+    Docs for Antd Table: https://ant.design/components/table/
+
+    Summary:  Render a placeholder table full or useless data that
+              is searchable and highlights results
+*/
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Table, Input, Button, Icon } from 'antd';

@@ -1,4 +1,8 @@
-// @flow
+/*
+  Summary:  Copy of the other pages with some changed data.
+            Going to be used to export the imported data in 
+            a more organized form.
+*/
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import routes from '../constants/routes';
