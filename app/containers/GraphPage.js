@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import routes from '../constants/routes';
 import TopNav from '../components/TopNav';
 import { PageHeader, Layout, Menu, Breadcrumb, Icon } from 'antd';
+import SampleGraph from '../components/SampleGraph';
 
 type Props = {};
 
@@ -74,6 +75,7 @@ export default class GraphPage extends Component<Props> {
             </Breadcrumb>
             <div className="test123" style={{ padding: 24, background: '#fff', minHeight: 360 }}>
               <TopNav />
+              <SampleGraph />
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>This is a footer</Footer>

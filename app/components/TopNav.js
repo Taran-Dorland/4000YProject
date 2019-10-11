@@ -29,7 +29,7 @@ export default class TopNav extends Component<Props> {
   
     render() {
       return (
-        <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
+        <Menu onClick={this.handleClick} selectedKeys={['bar']} mode="horizontal">
         <Menu.Item key="bar">
           <Icon type="bar-chart" />
           Bar Graph
