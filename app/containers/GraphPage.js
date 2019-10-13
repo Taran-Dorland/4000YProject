@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import routes from '../constants/routes';
 import TopNav from '../components/TopNav';
 import { PageHeader, Layout, Menu, Breadcrumb, Icon } from 'antd';
-import SampleGraph from '../components/SampleGraph';
+import SampleGraph from '../components/NivoSampleGraph';
 
 type Props = {};
 
