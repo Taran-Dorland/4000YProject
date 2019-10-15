@@ -9,6 +9,13 @@ type Props = {};
 export default class NivoSampleGraph extends Component<Props> {
   props: Props;
 
+  /*
+    Docs for Nivo Bar Graph: https://nivo.rocks/bar/
+
+    Summary: Renders a bar graph with a high amount of customizability
+
+  */
+
   render() {
 
     const MyResponsiveBar = ({ data = [
@@ -212,7 +219,7 @@ export default class NivoSampleGraph extends Component<Props> {
     )
 
     return (
-        <div style={{ height: 1000, width: 1000}}>
+        <div style={{ height: 400, width: 600 }}>
             <MyResponsiveBar />
         </div>
     );
