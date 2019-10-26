@@ -8,10 +8,6 @@ type Props = {};
 export default class FileUploadForm extends Component<Props> {
   props: Props;
 
-  outputData = data => {
-    console.log(data);
-  };
-
   /*
     Docs for .CSV Reader: https://www.npmjs.com/package/react-csv-reader
 
@@ -27,7 +23,7 @@ export default class FileUploadForm extends Component<Props> {
         cssClass="ant-form-item"
         cssInputClass="button"
         label="Select CSV with secret Death Star statistics"
-        onFileLoaded={this.outputData}
+        onFileLoaded={this.props.getCsvData}
         />
       </div>
     );
