@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import logo from ""
-export class login extends React.Component {
+export class Login extends React.Component {
     constructor(props) {
         super(props);
 
