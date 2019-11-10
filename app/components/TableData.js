@@ -32,7 +32,7 @@ export default class TableData extends Component<Props> {
       for (i = 1; i < (importedData.length - 1); i++) {
 
         data[i - 1] = {
-            key: i - 1,
+            key: i,
             name: importedData[i][0],
             dob: importedData[i][4],
             gender: importedData[i][3],
