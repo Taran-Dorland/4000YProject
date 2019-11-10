@@ -22,7 +22,7 @@ export default class FileUploadForm extends Component<Props> {
         <CSVReader
         cssClass="ant-form-item"
         cssInputClass="button"
-        label="Select CSV with secret Death Star statistics"
+        label="Select DMU .csv file "
         onFileLoaded={this.props.getCsvData}
         />
       </div>

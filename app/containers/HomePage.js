@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import routes from '../constants/routes';
 import FileUploadForm from '../components/FileUploadForm';
 import NivoGraph from '../components/NivoSampleGraph';
+import TableData from '../components/TableData';
 import { PageHeader, Layout, Menu, Breadcrumb, Icon } from 'antd';
 import { Button } from 'antd/lib/radio';
 
@@ -18,6 +19,8 @@ export default class HomePage extends Component<Props> {
   state = {
     collapsed: false,
     showGraph: false,
+    showImport: true,
+    showTable: false,
     csvData: "",
     button: false,
     key: "1",
@@ -32,17 +35,30 @@ export default class HomePage extends Component<Props> {
   //Handles button state and gets csv data
   handleCsvData = csvData => {
     //console.log(csvData);
-    this.setState({ csvData })
+    this.setState({ csvData });
     this.setState({ button: true });
 
     //console.log(csvData[0]);
   }
 
   //Handles graph generation state
-  handleClick = showGraph => {
+  handleGraph = showGraph => {
     console.log(showGraph);
     this.setState({ showGraph });
-    this.setState({ key: "2" })
+    this.setState({ key: "2" });
+    this.setState({ showImport: false });
+  }
+
+  //Handles table generation state
+  handleTable = showTable => {
+    console.log(showTable);
+    this.setState(
+      { 
+        showTable,
+        key: "3",
+        showImport: false
+      }
+     );
   }
 
   /*
@@ -90,16 +106,16 @@ export default class HomePage extends Component<Props> {
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
             </Breadcrumb>
             <div style={{ padding: 24, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-              <div className="test123" style={{ padding: 24, background: '#fff' }}>
-                <FileUploadForm getCsvData={this.handleCsvData} />
-              </div>
-              <div style={{ padding: 24 }}>
-                {this.state.showGraph ? <NivoGraph csvData={this.state.csvData} /> : null}
+              {this.state.showImport ? <div style={{ padding: 24, background: '#fff' }}> <FileUploadForm getCsvData={this.handleCsvData} /> </div> : null}
+              <div style={{ padding: 24, background: '#fff' }}>
+                <Button onClick={this.handleGraph} disabled={!this.state.button}>Generate Graph</Button>
               </div>
               <div style={{ padding: 24, background: '#fff' }}>
-                <Button onClick={this.handleClick} disabled={!this.state.button}>Generate Graph</Button>
+                <Button onClick={this.handleTable} disabled={!this.state.button}>Generate Table</Button>
               </div>
             </div>
+            {this.state.showGraph ? <div style={{ padding: 24 }}> <NivoGraph csvData={this.state.csvData} /> </div> : null}
+            {this.state.showTable ? <TableData csvData={this.state.csvData} /> : null}
           </Content>
           <Footer style={{ textAlign: 'center' }}>This is a footer</Footer>
         </Layout>
