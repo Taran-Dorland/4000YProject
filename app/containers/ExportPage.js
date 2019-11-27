@@ -8,7 +8,9 @@ import { Link } from 'react-router-dom';
 import routes from '../constants/routes';
 import FileUploadForm from '../components/FileUploadForm';
 import { PageHeader, Layout, Menu, Breadcrumb, Icon } from 'antd';
-
+import './ExportPage.css'
+import axios from 'axios';
+import { saveAs } from 'file-saver'; 
 type Props = {};
 
 const { Header, Content, Footer, Sider } = Layout;

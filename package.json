@@ -262,6 +262,7 @@
     "@nivo/colors": "^0.59.0",
     "@nivo/core": "^0.59.1",
     "@nivo/line": "^0.59.3",
+    "@react-pdf/renderer": "^1.6.8",
     "antd": "^3.23.6",
     "devtron": "^1.4.0",
     "electron-debug": "^2.0.0",
