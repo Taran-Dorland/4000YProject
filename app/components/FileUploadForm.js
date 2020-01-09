@@ -19,12 +19,14 @@ export default class FileUploadForm extends Component<Props> {
     
     return (
       <div className="container input">
+        <p>
         <CSVReader
         cssClass="ant-form-item"
         cssInputClass=""
         label="Select DMU .csv file "
         onFileLoaded={this.props.getCsvData}
         />
+        </p>
       </div>
     );
   }
