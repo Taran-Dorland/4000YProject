@@ -5,6 +5,7 @@
 */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Document } from 'react-pdf'
 import routes from '../constants/routes';
 import FileUploadForm from '../components/FileUploadForm';
 import { PageHeader, Layout, Menu, Breadcrumb, Icon } from 'antd';
@@ -15,7 +16,7 @@ const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
 export default class ExportPage extends Component<Props> {
-  props: Props;
+  props: Props; 
 
   state = {
     collapsed: false,

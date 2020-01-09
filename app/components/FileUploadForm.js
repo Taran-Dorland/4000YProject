@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import CSVReader from 'react-csv-reader';
 import { read } from 'fs';
+import ReactDOM from 'react-dom'
 
 type Props = {};
 
