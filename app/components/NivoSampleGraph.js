@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { ResponsiveBar } from '@nivo/bar'
+import { Checkbox, Select } from 'antd';
 
 type Props = {};
 
@@ -19,6 +20,35 @@ export default class NivoSampleGraph extends Component<Props> {
     console.log(this.props.csvData);
 
     var thisData = this.props.csvData;
+
+    function onChange(checkedValues) {
+      console.log('checked = ', checkedValues);
+    }
+
+    function handleChange(value) {
+      console.log(`selected ${value}`);
+    }
+    
+    const plainOptions = ['Apple', 'Pear', 'Orange'];
+    const options = [
+      { label: 'Apple', value: 'Apple' },
+      { label: 'Pear', value: 'Pear' },
+      { label: 'Orange', value: 'Orange' },
+    ];
+    const optionsWithDisabled = [
+      { label: 'Apple', value: 'Apple' },
+      { label: 'Pear', value: 'Pear' },
+      { label: 'Orange', value: 'Orange', disabled: false },
+    ];
+
+    const { Option } = Select;
+
+    const children = [];
+    for (let i = 1; i < thisData.length; i++) {
+
+      children.push(<Option key={thisData[i][0]}></Option>);
+      console.log("Pushed: " + thisData[i][0]);
+    }
 
     var data = [
       {
@@ -61,8 +91,32 @@ export default class NivoSampleGraph extends Component<Props> {
     var dataKeys = [ thisData[0][5], thisData[0][6], thisData[0][65], thisData[0][66] ];
 
     return (
+
         <div style={{ height: 500, width: 1000 }}>
-            <ResponsiveBar
+        <Checkbox.Group options={plainOptions} defaultValue={['Apple']} onChange={onChange} />
+        <br />
+        <br />
+        <Checkbox.Group options={options} defaultValue={['Pear']} onChange={onChange} />
+        <br />
+        <br />
+        <Checkbox.Group
+          options={optionsWithDisabled}
+          disabled
+          defaultValue={['Apple']}
+          onChange={onChange}
+        />
+        
+        <Select
+          mode="multiple"
+          style={{ width: '75%' }}
+          placeholder="Please select"
+          defaultValue={[]}
+          onChange={handleChange}
+        >
+        {children}
+        </Select>
+
+        <ResponsiveBar
         data={data}
         keys={dataKeys}
         indexBy="Client Name"
