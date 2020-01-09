@@ -18,7 +18,7 @@ export default class FileUploadForm extends Component<Props> {
   render() {
     
     return (
-      <div className="container">
+      <div className="container input">
         <CSVReader
         cssClass="ant-form-item"
         cssInputClass=""
