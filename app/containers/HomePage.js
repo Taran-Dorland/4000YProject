@@ -5,6 +5,7 @@ import routes from '../constants/routes';
 import FileUploadForm from '../components/FileUploadForm';
 import NivoGraph from '../components/NivoSampleGraph';
 import TableData from '../components/TableData';
+import SideBar from 'react-fixed-sidebar';
 import { Button, PageHeader, Layout, Menu, Breadcrumb, Icon } from 'antd';
 
 type Props = {};
@@ -31,8 +32,10 @@ export default class HomePage extends Component<Props> {
   onCollapse = collapsed => {
     console.log(collapsed);
     this.setState({ collapsed });
+    
   };
 
+ 
   //Handles button state and gets csv data
   handleCsvData = csvData => {
     //console.log(csvData);
@@ -107,8 +110,15 @@ export default class HomePage extends Component<Props> {
   render() {
     return (
       <Layout style={{ minHeight: '100vh' }}>
+        
         <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
-          <div className="logo" />
+        <Sider style={{
+          overflow: 'auto',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,}}>
+
+          <div className="logo" >
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" selectedKeys={this.state.key}>
             <Menu.Item key="1">
               <span><Button type="link" icon="home" onClick={this.handleHome}>Home</Button></span>
@@ -126,6 +136,8 @@ export default class HomePage extends Component<Props> {
               <span><Button type="link" icon="setting" disabled={!this.state.button}>Settings</Button></span>
             </Menu.Item>
           </Menu>
+          </div>
+        </Sider>
         </Sider>
         <Layout>
           <Header style={{ background: '#fff', padding: 0 }}>
@@ -141,22 +153,22 @@ export default class HomePage extends Component<Props> {
                     
                     <img src="Dalhousie-Header4.png" alt="DMU"/>
                     <div style={{ padding: 10, display: "flex",flexDirection: "column",background: '#1890ff',  alignItems:"center", borderRadius:5, margin: 20}}>
-                    <p>WELCOME!</p>
-                    <h3>Welcome to the Dalhousie Youth Services App!<br></br>This application generates modifiable reports that <br></br>
-                    contain graphs and chart that show monthly, quaterly, <br></br>
-                     and/or yearly reports. Please put your desired <br></br>CSV file for converting
-                    </h3>
+                      <p>WELCOME!</p>
+                      <h3>Welcome to the Dalhousie Youth Services App!<br></br>This application generates modifiable reports that <br></br>
+                      contain graphs and chart that show monthly, quaterly, <br></br>
+                      and/or yearly reports. Please put your desired <br></br>CSV file for converting
+                     </h3>
                     
                   <FileUploadForm getCsvData={this.handleCsvData} />
                   <Button onClick={this.clearData}>Clear CSV</Button>
                   </div>
-                </div>: null}
-            </div>
+              </div>: null}
+             </div>
             {this.state.showGraph ? <div style={{ padding: 24 }}> <NivoGraph csvData={this.state.csvData} /> </div> : null}
             {this.state.showTable ? <TableData csvData={this.state.csvData} /> : null}
           </Content>
           <Footer style={{ textAlign: 'center' }}>DMUⒸ</Footer>
-        </Layout>
+          </Layout>
       </Layout>
     );
   }
