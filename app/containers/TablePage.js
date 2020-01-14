@@ -79,7 +79,7 @@ export default class TablePage extends Component<Props> {
               <TableDisplay />
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>This is a footer</Footer>
+          <Footer style={{ textAlign: 'center' }}>DMU Ⓒ </Footer>
         </Layout>
       </Layout>
     );

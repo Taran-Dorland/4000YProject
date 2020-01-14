@@ -131,19 +131,31 @@ export default class HomePage extends Component<Props> {
           <Header style={{ background: '#fff', padding: 0 }}>
             <PageHeader title={this.state.title} subTitle={this.state.subTitle} />
           </Header>
+          
           <Content style={{ margin: '0 16px' }}>
-            <div style={{ padding: 24, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-              {this.state.showImport ? 
-                <div style={{ padding: 24, background: '#fff' }}> 
+          
+            <div style={{  display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+              {this.state.showImport ?
+                
+                <div style={{ padding: 24, display: "flex", flexDirection: "column",background: '#fff',  alignItems:"center" }}> 
+                    
+                    <img src="Dalhousie-Header4.png" alt="DMU"/>
+                    <div style={{ padding: 10, display: "flex",flexDirection: "column",background: '#1890ff',  alignItems:"center", borderRadius:5, margin: 20}}>
+                    <p>WELCOME!</p>
+                    <h3>Welcome to the Dalhousie Youth Services App!<br></br>This application generates modifiable reports that <br></br>
+                    contain graphs and chart that show monthly, quaterly, <br></br>
+                     and/or yearly reports. Please put your desired <br></br>CSV file for converting
+                    </h3>
+                    
                   <FileUploadForm getCsvData={this.handleCsvData} />
                   <Button onClick={this.clearData}>Clear CSV</Button>
-                </div>
-              : null}
+                  </div>
+                </div>: null}
             </div>
             {this.state.showGraph ? <div style={{ padding: 24 }}> <NivoGraph csvData={this.state.csvData} /> </div> : null}
             {this.state.showTable ? <TableData csvData={this.state.csvData} /> : null}
           </Content>
-          <Footer style={{ textAlign: 'center' }}>This is a footer</Footer>
+          <Footer style={{ textAlign: 'center' }}>DMUⒸ</Footer>
         </Layout>
       </Layout>
     );

@@ -78,7 +78,7 @@ export default class GraphPage extends Component<Props> {
               <SampleGraph />
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>This is a footer</Footer>
+          <Footer style={{ textAlign: 'center' }}>DMU </Footer>
         </Layout>
       </Layout>
     );
