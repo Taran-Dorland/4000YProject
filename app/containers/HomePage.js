@@ -5,6 +5,7 @@ import routes from '../constants/routes';
 import FileUploadForm from '../components/FileUploadForm';
 import NivoGraph from '../components/NivoSampleGraph';
 import TableData from '../components/TableData';
+import ExportData from '../components/ExportData';
 //import SideBar from 'react-fixed-sidebar';
 import { Button, PageHeader, Layout, Menu, Breadcrumb, Icon } from 'antd';
 
@@ -23,6 +24,7 @@ export default class HomePage extends Component<Props> {
     showGraph: false,
     showImport: true,
     showTable: false,
+    showExport: false,
     csvData: "",
     button: false,
     key: "1",
@@ -89,7 +91,20 @@ export default class HomePage extends Component<Props> {
       }
      );
   }
-
+//Handles table generation state
+handleExport = showExport => {
+  console.log(showExport);
+  this.setState(
+    { 
+      showGraph: false,
+      title: "Export Page",
+      subTitle: "",
+      showExport,
+      key: "4",
+      showImport: false
+    }
+   );
+}
   clearData = csvData => {
     console.log("Clearing CSV data");
     this.setState(
@@ -130,7 +145,7 @@ export default class HomePage extends Component<Props> {
               <span><Button type="link" icon="table" onClick={this.handleTable} disabled={!this.state.button}>Tables</Button></span>
             </Menu.Item>
             <Menu.Item key="4">
-              <span><Button type="link" icon="export" disabled={!this.state.button}>Export</Button></span>
+              <span><Button type="link" icon="export" onClick={this.handleExport} disabled={!this.state.button}>Export</Button></span>
             </Menu.Item>
             <Menu.Item key="5">
               <span><Button type="link" icon="setting" disabled={!this.state.button}>Settings</Button></span>
@@ -166,6 +181,7 @@ export default class HomePage extends Component<Props> {
              </div>
             {this.state.showGraph ? <div style={{ padding: 24 }}> <NivoGraph csvData={this.state.csvData} /> </div> : null}
             {this.state.showTable ? <TableData csvData={this.state.csvData} /> : null}
+            {this.state.showExport ? <ExportData csvData={this.state.csvData} /> : null}
           </Content>
           <Footer style={{ textAlign: 'center' }}>DMUⒸ</Footer>
           </Layout>

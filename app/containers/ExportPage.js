@@ -2,9 +2,10 @@
   Summary:  Copy of the other pages with some changed data.
             Going to be used to export the imported data in 
             a more organized form.
-*/
+
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Document } from 'react-pdf'
 import routes from '../constants/routes';
 import FileUploadForm from '../components/FileUploadForm';
 import { PageHeader, Layout, Menu, Breadcrumb, Icon } from 'antd';
@@ -15,7 +16,7 @@ const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
 export default class ExportPage extends Component<Props> {
-  props: Props;
+  props: Props; 
 
   state = {
     collapsed: false,
@@ -33,7 +34,7 @@ export default class ExportPage extends Component<Props> {
     Summary:  Renders the app layout, including the sidebar. Also loads the FileUploadForm component
               into the a div displayed on the main page.
   */
-
+  /*
   render() {
     return (
       <Layout style={{ minHeight: '100vh' }}>
@@ -85,3 +86,4 @@ export default class ExportPage extends Component<Props> {
     );
   }
 }
+*/
