@@ -12,12 +12,3 @@
 .container a {
   font-size: 1.4rem;
 }
-
-.container input {
-  position: absolute;
-  top: 30%;
-  bottom: 30%;
-  left: 10px;
-  text-align: justify;
-  background-color: dodgerblue;
-}
