@@ -57,6 +57,7 @@ export default class HomePage extends Component<Props> {
         subTitle: "Import Data",
         showGraph: false,
         showTable: false,
+        showExport: false,
         key: "1"
       }
     );
@@ -72,7 +73,8 @@ export default class HomePage extends Component<Props> {
         subTitle: "",
         showGraph,
         key: "2",
-        showImport: false
+        showImport: false,
+        showExport: false
       }
     );
   }
@@ -87,7 +89,8 @@ export default class HomePage extends Component<Props> {
         subTitle: "",
         showTable,
         key: "3",
-        showImport: false
+        showImport: false,
+        showExport: false
       }
      );
   }
@@ -97,6 +100,7 @@ handleExport = showExport => {
   this.setState(
     { 
       showGraph: false,
+      showTable: false,
       title: "Export Page",
       subTitle: "",
       showExport,
@@ -123,6 +127,9 @@ handleExport = showExport => {
   */
 
   render() {
+
+    const REACT_VERSION = React.version;
+
     return (
       <Layout style={{ minHeight: '100vh' }}>
         
@@ -183,7 +190,7 @@ handleExport = showExport => {
             {this.state.showTable ? <TableData csvData={this.state.csvData} /> : null}
             {this.state.showExport ? <ExportData csvData={this.state.csvData} /> : null}
           </Content>
-          <Footer style={{ textAlign: 'center' }}>DMUⒸ</Footer>
+          <Footer style={{ textAlign: 'center' }}>DMUⒸ REACT VERSION: {REACT_VERSION}</Footer>
           </Layout>
       </Layout>
     );
