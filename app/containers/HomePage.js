@@ -5,7 +5,7 @@ import routes from '../constants/routes';
 import FileUploadForm from '../components/FileUploadForm';
 import NivoGraph from '../components/NivoSampleGraph';
 import TableData from '../components/TableData';
-import SideBar from 'react-fixed-sidebar';
+//import SideBar from 'react-fixed-sidebar';
 import { Button, PageHeader, Layout, Menu, Breadcrumb, Icon } from 'antd';
 
 type Props = {};
