@@ -1,14 +1,15 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/lkew75wu482ng6we?svg=true)](https://ci.appveyor.com/project/Taran-Dorland/4000yproject)
 [![dependencies Status](https://david-dm.org/Taran-Dorland/4000YProject/status.svg)](https://david-dm.org/Taran-Dorland/4000YProject)
 [![devDependencies Status](https://david-dm.org/Taran-Dorland/4000YProject/dev-status.svg)](https://david-dm.org/Taran-Dorland/4000YProject?type=dev)
 
 A desktop application built with [React boiler plate](https://github.com/electron-react-boilerplate/electron-react-boilerplate) to integrate with an existing system by taking the exported data of the existing system and generating graphs, tables, and reports.
 
-<p>
+<p align="center">
 <a href="https://ant.design/">
-<img src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" alt="Ant Design Logo" width="50" height="50"/>
+<img src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" alt="Ant Design Logo" width="75" height="75"/>
 </a>
 <a href="https://reactjs.org/">
-<img src="https://gw.alipayobjects.com/zos/rmsportal/tXlLQhLvkEelMstLyHiN.svg" alt="React Logo" width="50" height="50"/>
+<img src="https://gw.alipayobjects.com/zos/rmsportal/tXlLQhLvkEelMstLyHiN.svg" alt="React Logo" width="75" height="75"/>
 </a>
 </p>
 
