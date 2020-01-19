@@ -2,12 +2,9 @@
 import React, { Component } from 'react';
 import CSVReader from 'react-csv-reader';
 import { read } from 'fs';
-<<<<<<<
 import ReactDOM from 'react-dom'
-=======
 import { Upload, Button } from 'antd';
 import styles from './Home.css';
->>>>>>>
 
 type Props = {};
 

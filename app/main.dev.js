@@ -70,7 +70,12 @@ app.on('ready', async () => {
   mainWindow = new BrowserWindow({
     show: false,
     width: 1280,
-    height: 720
+    height: 720,
+    icon: __dirname + '/img/dalhousie-logo.png',
+    title: "DYSS DMU Export Utility",
+    webPreferences: {
+      nodeIntegration: true
+    }
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
