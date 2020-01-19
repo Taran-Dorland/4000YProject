@@ -42,7 +42,7 @@ deploy:
   description: 'Release description'
   provider: GitHub
   auth_token:
-    secure: RKMRLoc9n9GcgnoM9FZhx0c2XwfXndykUTOcL4IWHeSGdHerkubWJfPo9niMdZ4a
+    secure: ryiyzn4zCHd2KJHZ6g+l3VsqtvvhSbkGC7XPqZN8xuMtGrwtRgpVOoZNcM03w+Ch
   draft: false
   prerelease: false
   on:
