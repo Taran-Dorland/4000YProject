@@ -3,8 +3,14 @@
 
 A desktop application built with [React boiler plate](https://github.com/electron-react-boilerplate/electron-react-boilerplate) to integrate with an existing system by taking the exported data of the existing system and generating graphs, tables, and reports.
 
-<img src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" alt="Ant Design Logo" href="https://ant.design/" width="50" height="50"/>
-<img src="https://gw.alipayobjects.com/zos/rmsportal/tXlLQhLvkEelMstLyHiN.svg" alt="React Logo" href="https://reactjs.org/" width="50" height="50"/>
+<p>
+<a href="https://ant.design/">
+<img src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" alt="Ant Design Logo" width="50" height="50"/>
+</a>
+<a href="https://reactjs.org/">
+<img src="https://gw.alipayobjects.com/zos/rmsportal/tXlLQhLvkEelMstLyHiN.svg" alt="React Logo" width="50" height="50"/>
+</a>
+</p>
 
 ### Notable dependencies:
 

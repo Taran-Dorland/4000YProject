@@ -32,7 +32,7 @@ install:
 
 test_script:
   - yarn package-ci
-  - yarn lint
+  # - yarn lint
   # - yarn flow
   - yarn test
   - yarn build-e2e
@@ -46,5 +46,5 @@ deploy:
   draft: false
   prerelease: false
   on:
-    branch: master                 # release from master branch only
-    APPVEYOR_REPO_TAG: true        # deploy on tag push only
+    branch: master # release from master branch only
+    APPVEYOR_REPO_TAG: true # deploy on tag push only
