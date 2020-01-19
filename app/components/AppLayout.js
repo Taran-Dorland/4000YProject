@@ -43,7 +43,7 @@ export default class AppLayout extends Component<Props> {
             <Menu.Item key="2">
               <Icon type="bar-chart" />
               <span>Graphs</span>
-              <Link to={routes.GRAPH}></Link>
+              <Link to={routes.GRAPH}></Link>yarn dev
             </Menu.Item>
             <Menu.Item key="3">
               <Icon type="table" />

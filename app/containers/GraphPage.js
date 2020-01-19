@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import routes from '../constants/routes';
 import TopNav from '../components/TopNav';
 import { PageHeader, Layout, Menu, Breadcrumb, Icon } from 'antd';
-import SampleGraph from '../components/NivoSampleGraph';
+import SampleGraph from '../components/GraphData';
 
 type Props = {};
 
@@ -78,7 +78,7 @@ export default class GraphPage extends Component<Props> {
               <SampleGraph />
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>This is a footer</Footer>
+          <Footer style={{ textAlign: 'center' }}>DMU </Footer>
         </Layout>
       </Layout>
     );
