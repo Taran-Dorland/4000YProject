@@ -35,8 +35,8 @@ test_script:
   # - yarn lint
   # - yarn flow
   # - yarn test
-  - yarn build-e2e
-  - yarn test-e2e
+  # - yarn build-e2e
+  # - yarn test-e2e
 
 deploy:
   description: 'Release description'
