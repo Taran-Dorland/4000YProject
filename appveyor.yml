@@ -32,19 +32,19 @@ install:
 
 test_script:
   - yarn package-ci
-  - yarn lint
+  # - yarn lint
   # - yarn flow
-  - yarn test
-  - yarn build-e2e
-  - yarn test-e2e
+  # - yarn test
+  # - yarn build-e2e
+  # - yarn test-e2e
 
 deploy:
   description: 'Release description'
   provider: GitHub
   auth_token:
-    secure: RKMRLoc9n9GcgnoM9FZhx0c2XwfXndykUTOcL4IWHeSGdHerkubWJfPo9niMdZ4a
+    secure: ryiyzn4zCHd2KJHZ6g+l3VsqtvvhSbkGC7XPqZN8xuMtGrwtRgpVOoZNcM03w+Ch
   draft: false
   prerelease: false
   on:
-    branch: master                 # release from master branch only
-    APPVEYOR_REPO_TAG: true        # deploy on tag push only
+    branch: master # release from master branch only
+    APPVEYOR_REPO_TAG: true # deploy on tag push only
