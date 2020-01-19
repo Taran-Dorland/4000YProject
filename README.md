@@ -2,7 +2,7 @@
 [![dependencies Status](https://david-dm.org/Taran-Dorland/4000YProject/status.svg)](https://david-dm.org/Taran-Dorland/4000YProject)
 [![devDependencies Status](https://david-dm.org/Taran-Dorland/4000YProject/dev-status.svg)](https://david-dm.org/Taran-Dorland/4000YProject?type=dev)
 
-A desktop application built with [React boiler plate](https://github.com/electron-react-boilerplate/electron-react-boilerplate) to integrate with an existing system by taking the exported data of the existing system and generating graphs, tables, and reports.
+A desktop application built with [React boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate) to integrate with an existing system by taking the exported data of the existing system and generating graphs, tables, and reports.
 
 <p align="center">
 <a href="https://ant.design/">
