@@ -26,6 +26,7 @@ export default class HomePage extends Component<Props> {
     showTable: false,
     showExport: false,
     csvData: "",
+    importedData: "",
     button: false,
     key: "1",
   };
@@ -40,11 +41,42 @@ export default class HomePage extends Component<Props> {
 
   //Handles button state and gets csv data
   handleCsvData = csvData => {
-    //console.log(csvData);
-    this.setState({ csvData });
-    this.setState({ button: true });
+    console.log(csvData);
 
-    //console.log(csvData[0]);
+    var data = {};
+    data.Clients = [];
+
+    for (let i = 1; i < csvData.length; i++) {
+      
+      var programs = [];
+
+      for (let j = 5; j < csvData[i].length; j++) {
+
+        //Push program name and hours
+        programs.push({
+          [csvData[0][j]]: csvData[i][j]
+        });
+      }
+
+      //Push Name, DOB, etc.
+      data.Clients.push({
+        [csvData[0][0]]: csvData[i][0],
+        [csvData[0][1]]: csvData[i][1],
+        [csvData[0][2]]: csvData[i][2],
+        [csvData[0][3]]: csvData[i][3],
+        [csvData[0][4]]: csvData[i][4],
+        "Programs": programs
+      });
+
+
+      data.Clients.Programs = [];
+    }
+
+    console.log(data);
+
+    this.setState({ csvData });
+    this.setState({ importedData: data });
+    this.setState({ button: true });
   }
 
   //
@@ -189,9 +221,9 @@ export default class HomePage extends Component<Props> {
             </div>
             {this.state.showGraph ? <div style={{ padding: 24 }}> <NivoGraph csvData={this.state.csvData} /> </div> : null}
             {this.state.showTable ? <TableData csvData={this.state.csvData} /> : null}
-            {this.state.showExport ? <ExportData csvData={this.state.csvData} /> : null}
+            {this.state.showExport ? <ExportData importedData={this.state.importedData} /> : null}
           </Content>
-          <Footer style={{ textAlign: 'center' }}>DMUⒸ REACT VERSION: {REACT_VERSION}</Footer>
+          <Footer style={{ textAlign: 'center' }}>DMUⒸ REACT VERSION: {REACT_VERSION} NODE VERSION: {process.version}</Footer>
         </Layout>
       </Layout>
     );

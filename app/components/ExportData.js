@@ -26,7 +26,7 @@ export default class ExportData extends Component {
         </ReactToPdf>
 
         <div style={{ width: 1250, height: 1250 }} ref={ref}>
-          <NivoGraph csvData={this.props.csvData} />
+          <NivoGraph csvData={this.props.importedData} />
         </div>
       </div>
     );
