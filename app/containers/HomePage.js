@@ -71,12 +71,102 @@ export default class HomePage extends Component<Props> {
 
       data.Clients.Programs = [];
     }
+    //convert a json object to a string
+    console.log(JSON.stringify(data));
 
-    console.log(data);
+    console.log(JSON.stringify(this.getAngerClients(data)));
+    
+    console.log(JSON.stringify(this.getProgramMinClients(data, 2)));
 
-    this.setState({ csvData });
-    this.setState({ importedData: data });
-    this.setState({ button: true });
+    this.setState({
+        csvData,
+        importedData: data,
+        button: true,
+        tableData: [
+            {
+                "startYear": 2016,
+                "endYear": 2017,
+                "data": [
+                    {
+                        "category": "anger",
+                        "clients": this.getAngerClients(data)
+                    },
+                    {
+                        "category": "cogSkills",
+                        "clients": this.getCogSkillsClients(data)
+                    },
+                    {
+                        "category": "min3",
+                        "clients": this.getProgramMinClients(data)
+                    }
+                ]
+            }
+        ]
+    });
+    // this.setState({ importedData: data });
+    // this.setState({ button: true });
+  }
+
+  getAngerClients(data) {
+    let outputClients = data.Clients
+      .filter(function(client) { return client.Programs
+        .filter(function(program) { return Object.keys(program)[0].startsWith("ANGER") && Number(program[Object.keys(program)[0]]) > 0; })
+          .length > 0;
+    });
+
+    //remove last totals element
+    if(outputClients.length > 0 && outputClients[outputClients.length-1]["Client Name"] == "Totals") {
+      outputClients.pop();
+    }
+
+    return outputClients;
+  }
+  
+  getCogSkillsClients(data) {
+    let outputClients = data.Clients
+      .filter(function(client) { return client.Programs
+        .filter(function(program) { return Object.keys(program)[0].startsWith("COG SKILLS") && Number(program[Object.keys(program)[0]]) > 0; })
+          .length > 0;
+    });
+
+    //remove last totals element
+    if(outputClients.length > 0 && outputClients[outputClients.length-1]["Client Name"] == "Totals") {
+      outputClients.pop();
+    }
+
+    return outputClients;
+  }
+  
+  getProgramMinClients(data, minPrograms) {
+    let outputClients = data.Clients
+      .filter(function(client) {
+        //create groups of programs for current client
+        let groupedPrograms = new Map();
+        let uniquePrograms = 0;
+        client.Programs.forEach(function(program) {
+          let prefix = Object.keys(program)[0].split(":")[0];
+          console.log("prefix: " + prefix);
+          if(groupedPrograms.has(prefix.toLowerCase())) {
+            groupedPrograms[prefix.toLowerCase()] = Number(groupedPrograms.get(prefix)) + 1;
+          } else {
+            groupedPrograms[prefix.toLowerCase()] = 1;
+            //increment counter
+            uniquePrograms++;
+          }
+        });
+
+        console.log("groupedPrograms: " + JSON.stringify(groupedPrograms));
+        
+        return uniquePrograms >= minPrograms;
+      });
+
+    //remove last totals element
+    console.log("outputClients: " + JSON.stringify(outputClients));
+    if(outputClients.length > 0 && outputClients[outputClients.length-1]["Client Name"] == "Totals") {
+      outputClients.pop();
+    }
+
+    return outputClients;
   }
 
   //

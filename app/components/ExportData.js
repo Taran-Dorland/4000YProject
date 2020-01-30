@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactToPdf from "react-to-pdf";
 import NivoGraph from './GraphData';
-
+import TableData from './TableData';
 type Props = {};
 
 export default class ExportData extends Component {
@@ -25,8 +25,8 @@ export default class ExportData extends Component {
           )}
         </ReactToPdf>
 
-        <div style={{ width: 1250, height: 1250 }} ref={ref}>
-          <NivoGraph csvData={this.props.importedData} />
+        */<div style={{ width: 1250, height: 1250 }} ref={ref}>
+          <TableData importedData={this.props.importedData} />
         </div>
       </div>
     );
