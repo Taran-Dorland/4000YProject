@@ -14,43 +14,43 @@ export default class NivoBarGraph extends Component<Props> {
 
     var data = [
       {
-        "Client Name": thisData[1][0],
-        "1- Contact with Youth": thisData[1][5],
-        "2 - Court contact": thisData[1][6],
-        "Total Indirect": thisData[1][65],
-        "Total": thisData[1][66]
+        "Client Name": thisData["Clients"][0]["Client Name"],
+        "1- Contact with Youth": thisData["Clients"][0]["Programs"][0]["Hours"],
+        "2 - Court contact": thisData["Clients"][0]["Programs"][1]["Hours"],
+        "Total Indirect": thisData["Clients"][0]["Programs"][60]["Hours"],
+        "Total": thisData["Clients"][0]["Programs"][61]["Hours"]
       },
       {
-        "Client Name": thisData[2][0],
-        "1- Contact with Youth": thisData[2][5],
-        "2 - Court contact": thisData[2][6],
-        "Total Indirect": thisData[2][65],
-        "Total": thisData[2][66]
+        "Client Name": thisData["Clients"][1]["Client Name"],
+        "1- Contact with Youth": thisData["Clients"][1]["Programs"][0]["Hours"],
+        "2 - Court contact": thisData["Clients"][1]["Programs"][1]["Hours"],
+        "Total Indirect": thisData["Clients"][1]["Programs"][60]["Hours"],
+        "Total": thisData["Clients"][1]["Programs"][61]["Hours"]
       },
       {
-        "Client Name": thisData[3][0],
-        "1- Contact with Youth": thisData[3][5],
-        "2 - Court contact": thisData[3][6],
-        "Total Indirect": thisData[3][65],
-        "Total": thisData[3][66]
+        "Client Name": thisData["Clients"][2]["Client Name"],
+        "1- Contact with Youth": thisData["Clients"][2]["Programs"][0]["Hours"],
+        "2 - Court contact": thisData["Clients"][2]["Programs"][1]["Hours"],
+        "Total Indirect": thisData["Clients"][2]["Programs"][60]["Hours"],
+        "Total": thisData["Clients"][2]["Programs"][61]["Hours"]
       },
       {
-        "Client Name": thisData[4][0],
-        "1- Contact with Youth": thisData[4][5],
-        "2 - Court contact": thisData[4][6],
-        "Total Indirect": thisData[4][65],
-        "Total": thisData[4][66]
-      },
-      {
-        "Client Name": thisData[5][0],
-        "1- Contact with Youth": thisData[5][5],
-        "2 - Court contact": thisData[5][6],
-        "Total Indirect": thisData[5][65],
-        "Total": thisData[5][66]
+        "Client Name": thisData["Clients"][3]["Client Name"],
+        "1- Contact with Youth": thisData["Clients"][3]["Programs"][0]["Hours"],
+        "2 - Court contact": thisData["Clients"][3]["Programs"][1]["Hours"],
+        "Total Indirect": thisData["Clients"][3]["Programs"][60]["Hours"],
+        "Total": thisData["Clients"][3]["Programs"][61]["Hours"]
       }
     ];
 
-    var dataKeys = [thisData[0][5], thisData[0][6], thisData[0][65], thisData[0][66]];
+    var dataKeys = [
+      thisData["Clients"][0]["Programs"][0]["Name"],
+      thisData["Clients"][0]["Programs"][1]["Name"],
+      thisData["Clients"][0]["Programs"][60]["Name"],
+      thisData["Clients"][0]["Programs"][61]["Name"]
+    ];
+
+    console.log(thisData["Clients"][0]["Programs"][0]["Name"]);
 
     const MyResponsiveBar = ({ data }) => (
       <ResponsiveBar

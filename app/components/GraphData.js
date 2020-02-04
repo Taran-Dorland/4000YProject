@@ -1,7 +1,12 @@
 // @flow
 import React, { Component } from 'react';
-import { Checkbox, Select, Tabs } from 'antd';
+import { Button, Icon } from 'antd';
+import GraphSelect from './GraphSelect';
 import BarGraph from './NivoBarGraph';
+import PieGraph from './NivoPieGraph';
+import LineGraph from './NivoLineGraph';
+import { Tabs } from 'antd';
+import { Pie } from '@nivo/pie';
 
 type Props = {};
 
@@ -15,124 +20,42 @@ export default class GraphData extends Component<Props> {
 
   */
 
+  //<GraphSelect importedClients={this.props.importedClients} importedPrograms={this.props.importedPrograms} />
+
   render() {
 
-    console.log(this.props.csvData);
+    console.log(this.props.importedClients);
+    console.log(this.props.importedPrograms);
 
-    var thisData = this.props.csvData;
+    var clients = this.props.importedClients;
+    var programs = this.props.importedPrograms;
 
-    const { Option } = Select;
+    const { TabPane } = Tabs;
 
-    //Options for the checkbox group
-    const angerOptions = [];
-    const cogOptions = [];
-    const eduOptions = [];
-    const employmentOptions = [];
-    const substanceOptions = [];
-    const otherOptions = [];
-    for (let i = 5; i < thisData[0].length; i++) {
-
-      if (thisData[0][i].toUpperCase().substring(0, 5) === "ANGER") {
-        angerOptions.push(<Option key={thisData[0][i].toString(36)}>{thisData[0][i].toString(36)}</Option>);
-      } else if (thisData[0][i].toUpperCase().substring(0, 3) === "COG") {
-        cogOptions.push(<Option key={thisData[0][i].toString(36)}>{thisData[0][i].toString(36)}</Option>);
-      } else if (thisData[0][i].toUpperCase().substring(0, 9) === "EDUCATION") {
-        eduOptions.push(<Option key={thisData[0][i].toString(36)}>{thisData[0][i].toString(36)}</Option>);
-      } else if (thisData[0][i].toUpperCase().substring(0, 10) === "EMPLOYMENT") {
-        employmentOptions.push(<Option key={thisData[0][i].toString(36)}>{thisData[0][i].toString(36)}</Option>);
-      } else if (thisData[0][i].toUpperCase().substring(0, 9) === "SUBSTANCE") {
-        substanceOptions.push(<Option key={thisData[0][i].toString(36)}>{thisData[0][i].toString(36)}</Option>);
-      } else {
-        otherOptions.push(<Option key={thisData[0][i].toString(36)}>{thisData[0][i].toString(36)}</Option>);
-      }
-    }
-
-    //Options for the select box
-    const children = [];
-    for (let i = 1; i < thisData.length; i++) {
-
-      if (!thisData[i][0]) {
-        thisData[i][0] = "no name specified" + i.toString();
-      }
-
-      children.push(<Option key={thisData[i][0].toString(36)}>{thisData[i][0].toString(36)}</Option>);
-      console.log("Pushed: " + thisData[i][0]);
-    }
-
-    function handleChange(value) {
-
-      console.log(`selected ${value}`);
-    }
-
-    function handleNameChange(value) {
-
-      for (let i = 0; i < value.length; i++) {
-
-        var dataToAdd = {
-          "Client Name": value[i],
-        }
-
-        data.push(dataToAdd);
-      }
-      console.log(`selected ${value}`);
+    function callback(key) {
+      console.log(key);
     }
 
     return (
 
       <div style={{ height: 500, width: 1000 }}>
+        <Tabs onChange={callback} type="card">
+          <TabPane tab="Bar Chart" key="1">
+            <BarGraph data={this.props.importedClients} />
+          </TabPane>
+          <TabPane tab="Pie Chart" key="2">
+            <PieGraph data={this.props.importedClients} />
+          </TabPane>
+          <TabPane tab="Line Chart" key="3">
+            <LineGraph data={this.props.importedClients} />
+          </TabPane>
+        </Tabs>
 
-        <Select
-          mode="multiple"
-          style={{ width: '50%' }}
-          placeholder="Please select"
-          onChange={handleChange}
-        >
-          {angerOptions}
-        </Select>
-        <Select
-          mode="multiple"
-          style={{ width: '50%' }}
-          placeholder="Please select"
-          onChange={handleChange}
-        >
-          {cogOptions}
-        </Select>
-        <Select
-          mode="multiple"
-          style={{ width: '50%' }}
-          placeholder="Please select"
-          onChange={handleChange}
-        >
-          {eduOptions}
-        </Select>
-        <Select
-          mode="multiple"
-          style={{ width: '50%' }}
-          placeholder="Please select"
-          onChange={handleChange}
-        >
-          {employmentOptions}
-        </Select>
-        <Select
-          mode="multiple"
-          style={{ width: '50%' }}
-          placeholder="Please select"
-          onChange={handleChange}
-        >
-          {otherOptions}
-        </Select>
+        <Button shape="round" type="primary">
+          Add to report
+          <Icon type="right" />
+        </Button>
 
-
-        <Select
-          mode="multiple"
-          style={{ width: '50%' }}
-          placeholder="Please select"
-          onChange={handleNameChange}
-        >
-          {children}
-        </Select>
-
-        <BarGraph data={thisData} />
       </div>
     );
   }

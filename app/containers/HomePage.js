@@ -26,7 +26,8 @@ export default class HomePage extends Component<Props> {
     showTable: false,
     showExport: false,
     csvData: "",
-    importedData: "",
+    importedClients: "",
+    importedPrograms: "",
     button: false,
     key: "1",
   };
@@ -46,15 +47,51 @@ export default class HomePage extends Component<Props> {
     var data = {};
     data.Clients = [];
 
+    var programNames = {};
+    programNames.Anger = [];
+    programNames.COGSkills = [];
+    programNames.Education = [];
+    programNames.Employment = [];
+    programNames.Substance = [];
+    programNames.Total = [];
+    programNames.Other = [];
+
+    //Push program names to a separate JS Object
+    for (let i = 5; i < csvData[0].length; i++) {
+
+      var str = csvData[0][i];
+      var strChk = str.toUpperCase();
+
+      //Push program names to new JS Object
+      if (strChk.substring(0, 5) === "ANGER") {
+        programNames.Anger.push(str);
+      } else if (strChk.substring(0, 10) === "COG SKILLS" || strChk.substring(0, 11) === "COG SKIILLS") {
+        programNames.COGSkills.push(str);
+      } else if (strChk.substring(0, 9) === "EDUCATION") {
+        programNames.Education.push(str);
+      } else if (strChk.substring(0, 10) === "EMPLOYMENT") {
+        programNames.Employment.push(str);
+      } else if (strChk.substring(0, 9) === "SUBSTANCE") {
+        programNames.Substance.push(str);
+      } else if (strChk.substring(0, 5) === "TOTAL" || strChk.substring(0, 14) === "TOTAL INDIRECT") {
+        programNames.Total.push(str);
+      } else {
+        programNames.Other.push(str);
+      }
+    }
+
+    console.log(programNames);
+
     for (let i = 1; i < csvData.length; i++) {
-      
+
       var programs = [];
 
       for (let j = 5; j < csvData[i].length; j++) {
 
         //Push program name and hours
         programs.push({
-          [csvData[0][j]]: csvData[i][j]
+          "Name": csvData[0][j],
+          "Hours": csvData[i][j]
         });
       }
 
@@ -68,15 +105,16 @@ export default class HomePage extends Component<Props> {
         "Programs": programs
       });
 
-
-      data.Clients.Programs = [];
     }
 
     console.log(data);
 
-    this.setState({ csvData });
-    this.setState({ importedData: data });
-    this.setState({ button: true });
+    this.setState({
+      csvData,
+      importedClients: data,
+      importedPrograms: programNames,
+      button: true
+    });
   }
 
   //
@@ -166,7 +204,7 @@ export default class HomePage extends Component<Props> {
       <Layout style={{ minHeight: '100vh' }}>
 
         <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
-          <Sider style={{
+          <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse} style={{
             overflow: 'auto',
             height: '100vh',
             position: 'fixed',
@@ -219,9 +257,9 @@ export default class HomePage extends Component<Props> {
                   </div>
                 </div> : null}
             </div>
-            {this.state.showGraph ? <div style={{ padding: 24 }}> <NivoGraph csvData={this.state.csvData} /> </div> : null}
+            {this.state.showGraph ? <div style={{ padding: 24 }}> <NivoGraph importedClients={this.state.importedClients} importedPrograms={this.state.importedPrograms} /> </div> : null}
             {this.state.showTable ? <TableData csvData={this.state.csvData} /> : null}
-            {this.state.showExport ? <ExportData importedData={this.state.importedData} /> : null}
+            {this.state.showExport ? <ExportData importedClients={this.state.importedClients} /> : null}
           </Content>
           <Footer style={{ textAlign: 'center' }}>DMUⒸ REACT VERSION: {REACT_VERSION} NODE VERSION: {process.version}</Footer>
         </Layout>
