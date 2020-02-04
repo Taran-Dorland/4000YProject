@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Button } from 'antd';
 import ReactDOM from 'react-dom';
 import ReactToPdf from "react-to-pdf";
+import NivoGraph from './GraphData';
+import TableData from './TableData';
 import BarGraph from './NivoBarGraph';
-
 type Props = {};
 
 export default class ExportData extends Component {
