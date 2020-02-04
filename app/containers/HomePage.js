@@ -106,6 +106,9 @@ export default class HomePage extends Component<Props> {
       });
 
     }
+
+    console.log(data);
+
     //convert a json object to a string
     console.log(JSON.stringify(data));
 
@@ -115,7 +118,7 @@ export default class HomePage extends Component<Props> {
 
     this.setState({
         csvData,
-        importedData: data,
+        importedClients: data,
         button: true,
         tableData: [
             {
@@ -143,10 +146,9 @@ export default class HomePage extends Component<Props> {
   }
 
   getAngerClients(data) {
-    let outputClients = data.Clients
-      .filter(function(client) { return client.Programs
-        .filter(function(program) { return Object.keys(program)[0].startsWith("ANGER") && Number(program[Object.keys(program)[0]]) > 0; })
-          .length > 0;
+    let outputClients = data.Clients.filter(function(client) {
+      return client.Programs.filter(function(program) {
+        return Object.keys(program)[0].startsWith("ANGER") && Number(program[Object.keys(program)[0]]) > 0; }).length > 0;
     });
 
     //remove last totals element
@@ -158,10 +160,9 @@ export default class HomePage extends Component<Props> {
   }
   
   getCogSkillsClients(data) {
-    let outputClients = data.Clients
-      .filter(function(client) { return client.Programs
-        .filter(function(program) { return Object.keys(program)[0].startsWith("COG SKILLS") && Number(program[Object.keys(program)[0]]) > 0; })
-          .length > 0;
+    let outputClients = data.Clients.filter(function(client) {
+        return client.Programs.filter(function(program) { 
+          return Object.keys(program)[0].startsWith("COG SKILLS") && Number(program[Object.keys(program)[0]]) > 0; }).length > 0;
     });
 
     //remove last totals element
@@ -173,8 +174,7 @@ export default class HomePage extends Component<Props> {
   }
   
   getProgramMinClients(data, minPrograms) {
-    let outputClients = data.Clients
-      .filter(function(client) {
+    let outputClients = data.Clients.filter(function(client) {
         //create groups of programs for current client
         let groupedPrograms = new Map();
         let uniquePrograms = 0;
