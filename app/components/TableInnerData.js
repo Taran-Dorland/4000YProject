@@ -21,6 +21,7 @@ export default class TableInnerData extends Component<Props> {
     }
 
     var importedData = this.props.csvData;
+    var importedClients = this.props.importedClients;
     
     //---------------------------------------------------------------------------------
     //Generates the programs and hours from the csv file

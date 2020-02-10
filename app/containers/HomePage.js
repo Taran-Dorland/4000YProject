@@ -345,7 +345,7 @@ export default class HomePage extends Component<Props> {
                 </div> : null}
             </div>
             {this.state.showGraph ? <div style={{ padding: 24 }}> <NivoGraph importedClients={this.state.importedClients} importedPrograms={this.state.importedPrograms} /> </div> : null}
-            {this.state.showTable ? <TableData csvData={this.state.csvData} /> : null}
+            {this.state.showTable ? <TableData csvData={this.state.csvData} importedClients={this.state.importedClients} /> : null}
             {this.state.showExport ? <ExportData importedClients={this.state.importedClients} /> : null}
           </Content>
           <Footer style={{ textAlign: 'center' }}>DMUⒸ REACT VERSION: {REACT_VERSION} NODE VERSION: {process.version}</Footer>
