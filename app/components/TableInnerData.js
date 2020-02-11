@@ -20,20 +20,11 @@ export default class TableInnerData extends Component<Props> {
         console.log('params', pagination, filters, sorter, extra);
     }
 
-    var importedData = this.props.csvData;
     var importedClients = this.props.importedClients;
-    
-    //---------------------------------------------------------------------------------
-    //Generates the programs and hours from the csv file
-    var clientPrograms = [];
-    var clientHours = [];
-    var i;
-    for (i = 0; i < importedData[0].length; i++) {
-        if (i > 4) {
-            clientPrograms.push(importedData[0][i]);
-            clientHours.push(importedData[this.props.clientKey][i]);
-        }
-    }
+    var clientID = this.props.clientKey;
+
+    console.log("Inner table");
+    console.log(importedClients);
 
     //---------------------------------------------------------------------------------
     //Sets the table columns
@@ -93,13 +84,13 @@ export default class TableInnerData extends Component<Props> {
       //---------------------------------------------------------------------------------
       //Generates the data to be set in the table
       const data = [];
-      var j;
-      for (j = 0; j < clientPrograms.length; j++) {
+
+      for (let j = 0; j < importedClients["Clients"][clientID]["Programs"].length; j++) {
         
         data[j] = {
             key: j,
-            program: clientPrograms[j],
-            hours: clientHours[j],
+            program: importedClients["Clients"][clientID]["Programs"][j]["Name"],
+            hours: importedClients["Clients"][clientID]["Programs"][j]["Hours"],
         }
       }
 

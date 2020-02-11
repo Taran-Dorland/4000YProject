@@ -274,6 +274,8 @@
     "electron-log": "^4.0.0",
     "electron-updater": "^4.2.0",
     "history": "^4.10.1",
+    "html2canvas": "^1.0.0-rc.5",
+    "jspdf": "^1.5.3",
     "react": "^16.12.0",
     "react-csv": "^1.1.1",
     "react-csv-reader": "^2.0.2",

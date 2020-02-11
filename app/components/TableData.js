@@ -32,26 +32,30 @@ export default class TableData extends Component<Props> {
       //
       const data = [];
       var i;
-      for (i = 0; i < importedClients.length; i++) {
+      for (i = 0; i < importedClients["Clients"].length - 1; i++) {
 
-        data[i - 1] = {
+        console.log(i);
+
+        data[i] = {
             key: i,
-            name: importedClients["Clients"][i]["Name"],
+            name: importedClients["Clients"][i]["Client Name"],
             start: importedClients["Clients"][i]["Start Date"],
             end: importedClients["Clients"][i]["End Date"],
             gender: importedClients["Clients"][i]["Gender"],
             dob: importedClients["Clients"][i]["Date of Birth"],
-            indirtotal: importedClients["Clients"][i]["Programs"][60]["Name"],
-            total: importedClients["Clients"][i]["Programs"][61]["Name"]
+            indirtotal: importedClients["Clients"][i]["Programs"][60]["Hours"],
+            total: importedClients["Clients"][i]["Programs"][61]["Hours"]
         }
       }
+
+      console.log(data);
 
       //---------------------------------------------------------------------------------
       //Record key identifies the client being output to each inner table
     return (
     <Table
         columns={columns}
-        expandedRowRender={record => <InnerTable csvData={this.props.csvData} importedClients={this.props.importedClients} clientKey={record.key} />}
+        expandedRowRender={record => <InnerTable importedClients={this.props.importedClients} clientKey={record.key} />}
         dataSource={data}
     />
     );
