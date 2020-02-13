@@ -15,6 +15,7 @@ export default class NivoBarGraph extends Component<Props> {
   render() {
 
     console.log(this.props.data);
+    console.log(this.props.dataPrograms);
 
     var thisData = this.props.data;
 

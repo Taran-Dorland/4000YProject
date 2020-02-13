@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { Checkbox, Select, Tabs } from 'antd';
+import { Checkbox, Select, Option, Tabs } from 'antd';
 
 type Props = {};
 
@@ -24,11 +24,14 @@ export default class GraphSelect extends Component<Props> {
 
     const { Option } = Select;
 
-    function addOption(arr, jsonArr) {
+    function addOption(arr, jsonArr, keyValue) {
 
-        for (let i = 0; i < jsonArr.length; i++) {
-          arr.push(<Option key={jsonArr[i].toString(36)}>{jsonArr[i].toString(36)}</Option>);
-        }
+      for (let i = 10; i < jsonArr.length; i++) {
+        console.log(jsonArr[i]);
+        arr += <Option key={keyValue.toString(36)} value={keyValue}></Option>;
+        keyValue++;
+      }
+      return keyValue;
     }
 
     var angerOptions = [];
@@ -39,15 +42,21 @@ export default class GraphSelect extends Component<Props> {
     var totalOptions = [];
     var otherOptions = [];
 
-    console.log("THIS IS PROGRAMS ANGER: " + programs.Anger);
+    var keyVal = 0;
 
-    addOption(angerOptions, programs.Anger);
-    addOption(cogOptions, programs.COGSkills);
-    addOption(eduOptions, programs.Education);
-    addOption(employOptions, programs.Employment);
-    addOption(subOptions, programs.Substance);
-    addOption(totalOptions, programs.Total);
-    addOption(otherOptions, programs.Other);
+    for (let i = 0; i < programs.Anger; i++) {
+      angerOptions.push(<Option key={keyValue.toString(36)} value={keyValue}></Option>);
+    }
+
+    // keyVal = addOption(angerOptions, programs.Anger, keyVal);
+    // keyVal = addOption(cogOptions, programs.COGSkills, keyVal);
+    // keyVal = addOption(eduOptions, programs.Education, keyVal);
+    // keyVal = addOption(employOptions, programs.Employment, keyVal);
+    // keyVal = addOption(subOptions, programs.Substance, keyVal);
+    // keyVal = addOption(totalOptions, programs.Total, keyVal);
+    // keyVal = addOption(otherOptions, programs.Other, keyVal);
+
+    console.log("ANGER OPTIONS: " + angerOptions);
 
     function handleChange(value) {
 
@@ -71,46 +80,10 @@ export default class GraphSelect extends Component<Props> {
 
       <div style={{ height: 500, width: 1000 }}>
 
-        <Select
-          mode="multiple"
-          style={{ width: '50%' }}
-          placeholder="Please select"
-          onChange={handleChange}
-        >
+        <Select mode="multiple" style={{ width: '50%' }} placeholder="Please select" onChange={handleChange}>
           {programs.Anger}
         </Select>
-        <Select
-          mode="multiple"
-          style={{ width: '50%' }}
-          placeholder="Please select"
-          onChange={handleChange}
-        >
-          {programs.COGSkills}
-        </Select>
-        <Select
-          mode="multiple"
-          style={{ width: '50%' }}
-          placeholder="Please select"
-          onChange={handleChange}
-        >
-          {programs.Education}
-        </Select>
-        <Select
-          mode="multiple"
-          style={{ width: '50%' }}
-          placeholder="Please select"
-          onChange={handleChange}
-        >
-          {programs.Employment}
-        </Select>
-        <Select
-          mode="multiple"
-          style={{ width: '50%' }}
-          placeholder="Please select"
-          onChange={handleChange}
-        >
-          {programs.Other}
-        </Select>
+        
       </div>
     );
   }

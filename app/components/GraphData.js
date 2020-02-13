@@ -56,7 +56,7 @@ export default class GraphData extends Component<Props> {
       <div style={{ height: 500, width: 1000 }}>
         <Tabs onChange={callback} type="card">
           <TabPane tab="Bar Chart" key="1">
-            <BarGraph data={this.props.importedClients} dataPrograms={programs} />
+            <BarGraph data={this.props.importedClients} dataPrograms={this.props.importedPrograms} />
           </TabPane>
           <TabPane tab="Pie Chart" key="2">
             <PieGraph data={this.props.importedClients} />

@@ -113,6 +113,7 @@ export default class HomePage extends Component<Props> {
     this.setState({
         csvData,
         importedClients: data,
+        importedPrograms: programNames,
         button: true
     });
   }
