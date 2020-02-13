@@ -8,6 +8,7 @@ import TableData from '../components/TableData';
 import ExportData from '../components/ExportData';
 //import SideBar from 'react-fixed-sidebar';
 import { Button, PageHeader, Layout, Menu, Breadcrumb, Icon } from 'antd';
+import Query from '../components/Query';
 
 type Props = {};
 
@@ -25,6 +26,7 @@ export default class HomePage extends Component<Props> {
     showImport: true,
     showTable: false,
     showExport: false,
+    showQuery: false,
     csvData: "",
     importedClients: "",
     importedPrograms: "",
@@ -214,6 +216,7 @@ export default class HomePage extends Component<Props> {
         subTitle: "Import Data",
         showGraph: false,
         showTable: false,
+        showQuery: false,
         showExport: false,
         key: "1"
       }
@@ -231,6 +234,7 @@ export default class HomePage extends Component<Props> {
         showGraph,
         key: "2",
         showImport: false,
+        showQuery: false,
         showExport: false
       }
     );
@@ -247,6 +251,7 @@ export default class HomePage extends Component<Props> {
         showTable,
         key: "3",
         showImport: false,
+        showQuery: false,
         showExport: false
       }
     );
@@ -258,6 +263,7 @@ export default class HomePage extends Component<Props> {
       {
         showGraph: false,
         showTable: false,
+        showQuery: false,
         title: "Export Page",
         subTitle: "",
         showExport,
@@ -266,6 +272,23 @@ export default class HomePage extends Component<Props> {
       }
     );
   }
+    //Handles query generation state
+    handleQuery = showQuery => {
+      console.log(showQuery);
+      this.setState(
+        {
+          showTable: false,
+          title: "Query Data",
+          subTitle: "",
+          showGraph: false,
+          showQuery,
+          key: "6",
+          showImport: false,
+          showExport: false
+        }
+      );
+    }
+  
   clearData = csvData => {
     console.log("Clearing CSV data");
     this.setState(
@@ -278,7 +301,6 @@ export default class HomePage extends Component<Props> {
 
   /*
     Docs for Antd Layouts: https://ant.design/components/layout/
-
     Summary:  Renders the app layout, including the sidebar. Also loads the FileUploadForm component
               into the a div displayed on the main page.
   */
@@ -315,6 +337,10 @@ export default class HomePage extends Component<Props> {
                 <Menu.Item key="5">
                   <span><Button type="link" icon="setting" disabled={!this.state.button}>Settings</Button></span>
                 </Menu.Item>
+                 <Menu.Item key="6">
+                  <span><Button type="link" icon="query" onClick={this.handleQuery} disabled={!this.state.button}>Query</Button></span>
+                </Menu.Item>
+
               </Menu>
             </div>
           </Sider>
@@ -347,6 +373,7 @@ export default class HomePage extends Component<Props> {
             {this.state.showGraph ? <div style={{ padding: 24 }}> <NivoGraph importedClients={this.state.importedClients} importedPrograms={this.state.importedPrograms} /> </div> : null}
             {this.state.showTable ? <TableData csvData={this.state.csvData} importedClients={this.state.importedClients} /> : null}
             {this.state.showExport ? <ExportData importedClients={this.state.importedClients} /> : null}
+            {this.state.showQuery ? <Query/> : null}
           </Content>
           <Footer style={{ textAlign: 'center' }}>DMUⒸ REACT VERSION: {REACT_VERSION} NODE VERSION: {process.version}</Footer>
         </Layout>

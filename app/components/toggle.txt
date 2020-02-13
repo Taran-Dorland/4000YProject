@@ -1,0 +1,59 @@
+import React, { Component } from 'react';
+
+export default class Query extends Component<Props>{ 
+
+    props: Props;
+
+ state = {
+     on: false,
+
+ }
+toggle = () => {
+    this.setState({
+        on: !this.state.on
+    })
+}
+
+render(){
+    return (
+<div>
+    {this.state.on && <h1>Toggle me</h1>}
+    <button onClick={this.toggle}>Show/Hide</button>
+</div>
+    );
+}
+
+
+
+}
+
+
+showQuery: false,
+
+
+
+
+  //Handles query generation state
+  handleQuery = showQuery => {
+    console.log(showQuery);
+    this.setState(
+      {
+        showTable: false,
+        title: "Query Data",
+        subTitle: "",
+        showGraph: false,
+        showQuery,
+        key: "6",
+        showImport: false,
+        showExport: false
+      }
+    );
+  }
+
+
+    <Menu.Item key="6">
+                  <span><Button type="link" icon="query" onClick={this.handleQuery} disabled={!this.state.button}>Query</Button></span>
+                </Menu.Item>
+
+
+                  {this.state.showQuery ? <Toggle/> : null}
