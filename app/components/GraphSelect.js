@@ -39,6 +39,8 @@ export default class GraphSelect extends Component<Props> {
     var totalOptions = [];
     var otherOptions = [];
 
+    console.log("THIS IS PROGRAMS ANGER: " + programs.Anger);
+
     addOption(angerOptions, programs.Anger);
     addOption(cogOptions, programs.COGSkills);
     addOption(eduOptions, programs.Education);

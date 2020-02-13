@@ -12,6 +12,21 @@ type Props = {};
 
 export default class GraphData extends Component<Props> {
   props: Props;
+  
+  state = {
+    
+  };
+
+  addValue = testVal => {
+
+    console.log("Previous: " + this.state.testVal);
+
+    this.setState({
+      testVal: 6
+    });
+
+    console.log("New: " + this.state.testVal);
+  };
 
   /*
     Docs for Nivo Bar Graph: https://nivo.rocks/bar/
@@ -41,7 +56,7 @@ export default class GraphData extends Component<Props> {
       <div style={{ height: 500, width: 1000 }}>
         <Tabs onChange={callback} type="card">
           <TabPane tab="Bar Chart" key="1">
-            <BarGraph data={this.props.importedClients} />
+            <BarGraph data={this.props.importedClients} dataPrograms={programs} />
           </TabPane>
           <TabPane tab="Pie Chart" key="2">
             <PieGraph data={this.props.importedClients} />
@@ -55,6 +70,8 @@ export default class GraphData extends Component<Props> {
           Add to report
           <Icon type="right" />
         </Button>
+
+        <Button onClick={this.addValue}></Button>
 
       </div>
     );

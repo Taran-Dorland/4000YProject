@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { ResponsiveBar } from '@nivo/bar';
+import GraphSelect from './GraphSelect';
 
 type Props = {};
 
 export default class NivoBarGraph extends Component<Props> {
   props: Props;
+
+  state = {
+    graphData: "",
+    graphDataKeys: ""
+  };
 
   render() {
 
@@ -137,6 +143,7 @@ export default class NivoBarGraph extends Component<Props> {
 
       <div style={{ height: 500, width: 1000 }}>
         <MyResponsiveBar data={data} />
+        <GraphSelect importedClients={this.props.data} importedPrograms={this.props.dataPrograms} />
       </div>
     );
   }
