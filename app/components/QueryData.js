@@ -157,43 +157,8 @@ this.setState({
     );
   }
 }
-=======
   //Handles button state and gets csv data
-  static handleCsvData(csvData) {
-    console.log(csvData);
-
-    var data = {};
-
-    data.Clients = [];
-
-    for (let i = 1; i < csvData.length; i++) {
-
-      var programs = [];
-
-      for (let j = 5; j < csvData[i].length; j++) {
-
-        //Push program name and hours
-        programs.push({
-          [csvData[0][j]]: csvData[i][j]
-        });
-      }
-
-      //Push Name, DOB, etc.
-      data.Clients.push({
-        [csvData[0][0]]: csvData[i][0],
-        [csvData[0][1]]: csvData[i][1],
-        [csvData[0][2]]: csvData[i][2],
-        [csvData[0][3]]: csvData[i][3],
-        [csvData[0][4]]: csvData[i][4],
-        "Programs": programs
-      });
-
-
-      data.Clients.Programs = [];
-    }
-
-    uploadedData = data;
->>>>>>> dev
+  
 
     * /
 
