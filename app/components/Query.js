@@ -7,7 +7,6 @@ import { Checkbox, Row, Col } from 'antd';
 
 type Props = {};
 
-export default class Query extends Component<Props>{
 
 
 const onloadOptions = [
@@ -17,13 +16,8 @@ const onloadOptions = [
   { label: 'range between 1 and 3', value: 104 },
 ];
 
-<<<<<<< HEAD
-
 export default class Query extends Component<Props>{
-
   props: Props;
-
-
   state = {
     checkedList: [],
     checkAll: false,
