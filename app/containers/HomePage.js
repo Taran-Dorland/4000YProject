@@ -112,11 +112,11 @@ export default class HomePage extends Component<Props> {
     console.log(data);
 
     //convert a json object to a string
-    console.log(JSON.stringify(data));
+   // console.log(JSON.stringify(data));
 
-    console.log(JSON.stringify(this.getAngerClients(data)));
+    //console.log(JSON.stringify(this.getAngerClients(data)));
     
-    console.log(JSON.stringify(this.getProgramMinClients(data, 2)));
+   // console.log(JSON.stringify(this.getProgramMinClients(data, 2)));
 
     this.setState({
         csvData,
@@ -214,7 +214,7 @@ export default class HomePage extends Component<Props> {
         showImport: true,
         title: "Home Page",
         subTitle: "Import Data",
-        showGraph: false,
+        shyarnowGraph: false,
         showTable: false,
         showQuery: false,
         showExport: false,

@@ -267,7 +267,7 @@
     "@nivo/core": "^0.61.0",
     "@nivo/line": "^0.61.1",
     "@nivo/pie": "^0.61.1",
-    "antd": "^3.23.6",
+    "antd": "^3.26.9",
     "connected-react-router": "^6.6.0",
     "devtron": "^1.4.0",
     "electron-debug": "^3.0.1",
