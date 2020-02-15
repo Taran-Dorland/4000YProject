@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { Checkbox, Select, Tabs } from 'antd';
+import { Checkbox, Select, Option, Tabs } from 'antd';
 
 type Props = {};
 
@@ -22,14 +22,7 @@ export default class GraphSelect extends Component<Props> {
     var clients = this.props.importedClients;
     var programs = this.props.importedPrograms;
 
-    const { Option } = Select;
-
-    function addOption(arr, jsonArr) {
-
-        for (let i = 0; i < jsonArr.length; i++) {
-          arr.push(<Option key={jsonArr[i].toString(36)}>{jsonArr[i].toString(36)}</Option>);
-        }
-    }
+    const { Option, OptGroup } = Select;
 
     var angerOptions = [];
     var cogOptions = [];
@@ -39,75 +32,74 @@ export default class GraphSelect extends Component<Props> {
     var totalOptions = [];
     var otherOptions = [];
 
-    addOption(angerOptions, programs.Anger);
-    addOption(cogOptions, programs.COGSkills);
-    addOption(eduOptions, programs.Education);
-    addOption(employOptions, programs.Employment);
-    addOption(subOptions, programs.Substance);
-    addOption(totalOptions, programs.Total);
-    addOption(otherOptions, programs.Other);
+    var programVal = 0;
 
-    function handleChange(value) {
-
-      console.log(`selected ${value}`);
+    for (let i = 0; i < programs.Anger.length; i++) {
+      angerOptions.push(<Option key={programVal}>{programs.Anger[i]}</Option>);
+      programVal++;
+    }
+    for (let i = 0; i < programs.COGSkills.length; i++) {
+      cogOptions.push(<Option key={programVal}>{programs.COGSkills[i]}</Option>);
+      programVal++;
+    }
+    for (let i = 0; i < programs.Education.length; i++) {
+      eduOptions.push(<Option key={programVal}>{programs.Education[i]}</Option>);
+      programVal++;
+    }
+    for (let i = 0; i < programs.Employment.length; i++) {
+      employOptions.push(<Option key={programVal}>{programs.Employment[i]}</Option>);
+      programVal++;
+    }
+    for (let i = 0; i < programs.Substance.length; i++) {
+      subOptions.push(<Option key={programVal}>{programs.Substance[i]}</Option>);
+      programVal++;
+    }
+    for (let i = 0; i < programs.Other.length; i++) {
+      otherOptions.push(<Option key={programVal}>{programs.Other[i]}</Option>);
+      programVal++;
+    }
+    for (let i = 0; i < programs.Total.length; i++) {
+      totalOptions.push(<Option key={programVal}>{programs.Total[i]}</Option>);
+      programVal++;
     }
 
-    function handleNameChange(value) {
+    var clientOptions = [];
 
-      for (let i = 0; i < value.length; i++) {
+    var clientVal = 0;
 
-        var dataToAdd = {
-          "Client Name": value[i],
-        }
+    for (let i = 0; i < clients["Clients"].length; i++) {
 
-        data.push(dataToAdd);
-      }
-      console.log(`selected ${value}`);
+      clientOptions.push(<Option key={clientVal}>{clients["Clients"][i]["Client Name"]}</Option>);
+      clientVal++;
     }
 
     return (
 
-      <div style={{ height: 500, width: 1000 }}>
+      <div style={{ height: 150, width: 1000 }}>
 
-        <Select
-          mode="multiple"
-          style={{ width: '50%' }}
-          placeholder="Please select"
-          onChange={handleChange}
-        >
-          {programs.Anger}
+        <Select mode="multiple" style={{ width: '50%' }} placeholder="Anger" onChange={this.props.programChange}>
+          {angerOptions}
         </Select>
-        <Select
-          mode="multiple"
-          style={{ width: '50%' }}
-          placeholder="Please select"
-          onChange={handleChange}
-        >
-          {programs.COGSkills}
+        <Select mode="multiple" style={{ width: '50%' }} placeholder="COG" onChange={this.props.programChange}>
+          {cogOptions}
         </Select>
-        <Select
-          mode="multiple"
-          style={{ width: '50%' }}
-          placeholder="Please select"
-          onChange={handleChange}
-        >
-          {programs.Education}
+        <Select mode="multiple" style={{ width: '50%' }} placeholder="Education" onChange={this.props.programChange}>
+          {eduOptions}
         </Select>
-        <Select
-          mode="multiple"
-          style={{ width: '50%' }}
-          placeholder="Please select"
-          onChange={handleChange}
-        >
-          {programs.Employment}
+        <Select mode="multiple" style={{ width: '50%' }} placeholder="Employment" onChange={this.props.programChange}>
+          {employOptions}
         </Select>
-        <Select
-          mode="multiple"
-          style={{ width: '50%' }}
-          placeholder="Please select"
-          onChange={handleChange}
-        >
-          {programs.Other}
+        <Select mode="multiple" style={{ width: '50%' }} placeholder="Substance" onChange={this.props.programChange}>
+          {subOptions}
+        </Select>
+        <Select mode="multiple" style={{ width: '50%' }} placeholder="Other" onChange={this.props.programChange}>
+          {otherOptions}
+        </Select>
+        <Select mode="multiple" style={{ width: '50%' }} placeholder="Total" onChange={this.props.programChange}>
+          {totalOptions}
+        </Select>
+        <Select mode="multiple" style={{ width: '50%' }} placeholder="Clients" onChange={this.props.clientChange}>
+          {clientOptions}
         </Select>
       </div>
     );

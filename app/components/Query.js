@@ -4,7 +4,11 @@ import 'antd/dist/antd.css';
 //import './index.css';
 import { Checkbox, Row, Col } from 'antd';
 
+<<<<<<< HEAD
 type Props = {};
+=======
+export default class Query extends Component<Props>{
+>>>>>>> dev
 
 const onloadOptions = [
   { label: 'Anger', value: 101 },
@@ -13,6 +17,7 @@ const onloadOptions = [
   { label: 'range between 1 and 3', value: 104 },
 ];
 
+<<<<<<< HEAD
 
 export default class Query extends Component<Props>{
 
@@ -140,6 +145,29 @@ console.log(onGroupChange)
           {this.state.showCog ? <p>QUERY FOR COG</p> : null}
           {this.state.showMax3 ? <p>QUERY FOR MAX3</p> : null}
           
+=======
+    state = {
+        on: false,
+
+    }
+    toggle = () => {
+        this.setState({
+            on: !this.state.on
+        })
+
+    }
+
+    render() {
+        return (
+            <div>
+
+                {this.state.on && <h1>Toggle me</h1>}
+
+                <button onClick={this.toggle}>Show/Hide</button>
+            </div>
+        );
+    }
+>>>>>>> dev
 
 
         </div>

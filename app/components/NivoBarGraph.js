@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ResponsiveBar } from '@nivo/bar';
+import GraphSelect from './GraphSelect';
 
 type Props = {};
 
@@ -9,48 +10,68 @@ export default class NivoBarGraph extends Component<Props> {
   render() {
 
     console.log(this.props.data);
+    console.log(this.props.dataPrograms);
 
-    var thisData = this.props.data;
+    var importedClients = this.props.data;
 
-    var data = [
-      {
-        "Client Name": thisData["Clients"][0]["Client Name"],
-        "1- Contact with Youth": thisData["Clients"][0]["Programs"][0]["Hours"],
-        "2 - Court contact": thisData["Clients"][0]["Programs"][1]["Hours"],
-        "Total Indirect": thisData["Clients"][0]["Programs"][60]["Hours"],
-        "Total": thisData["Clients"][0]["Programs"][61]["Hours"]
-      },
-      {
-        "Client Name": thisData["Clients"][1]["Client Name"],
-        "1- Contact with Youth": thisData["Clients"][1]["Programs"][0]["Hours"],
-        "2 - Court contact": thisData["Clients"][1]["Programs"][1]["Hours"],
-        "Total Indirect": thisData["Clients"][1]["Programs"][60]["Hours"],
-        "Total": thisData["Clients"][1]["Programs"][61]["Hours"]
-      },
-      {
-        "Client Name": thisData["Clients"][2]["Client Name"],
-        "1- Contact with Youth": thisData["Clients"][2]["Programs"][0]["Hours"],
-        "2 - Court contact": thisData["Clients"][2]["Programs"][1]["Hours"],
-        "Total Indirect": thisData["Clients"][2]["Programs"][60]["Hours"],
-        "Total": thisData["Clients"][2]["Programs"][61]["Hours"]
-      },
-      {
-        "Client Name": thisData["Clients"][3]["Client Name"],
-        "1- Contact with Youth": thisData["Clients"][3]["Programs"][0]["Hours"],
-        "2 - Court contact": thisData["Clients"][3]["Programs"][1]["Hours"],
-        "Total Indirect": thisData["Clients"][3]["Programs"][60]["Hours"],
-        "Total": thisData["Clients"][3]["Programs"][61]["Hours"]
+    var programs = this.props.selectedPrograms;
+    var clients = this.props.selectedClients;
+
+    var data = [];
+
+    //
+    for (let i = 0; i < clients.length; i++) {
+
+      var objToPush = {};
+
+      objToPush["Client Name"] = importedClients["Clients"][clients[i]]["Client Name"];
+      
+      for (let j = 0; j < programs.length; j++) {
+
+        objToPush[importedClients["Clients"][clients[i]]["Programs"][programs[j]]["Name"].toString(36)] = importedClients["Clients"][clients[i]]["Programs"][programs[j]]["Hours"];
       }
-    ];
 
-    var dataKeys = [
-      thisData["Clients"][0]["Programs"][0]["Name"],
-      thisData["Clients"][0]["Programs"][1]["Name"],
-      thisData["Clients"][0]["Programs"][60]["Name"],
-      thisData["Clients"][0]["Programs"][61]["Name"]
-    ];
+      data.push(objToPush);
+    }
 
-    console.log(thisData["Clients"][0]["Programs"][0]["Name"]);
+    // var data = [
+    //   {
+    //     "Client Name": importedClients["Clients"][0]["Client Name"],
+    //     "1- Contact with Youth": importedClients["Clients"][0]["Programs"][0]["Hours"],
+    //     "2 - Court contact": importedClients["Clients"][0]["Programs"][1]["Hours"],
+    //     "Total Indirect": importedClients["Clients"][0]["Programs"][60]["Hours"],
+    //     "Total": importedClients["Clients"][0]["Programs"][61]["Hours"]
+    //   },
+    //   {
+    //     "Client Name": importedClients["Clients"][1]["Client Name"],
+    //     "1- Contact with Youth": importedClients["Clients"][1]["Programs"][0]["Hours"],
+    //     "2 - Court contact": importedClients["Clients"][1]["Programs"][1]["Hours"],
+    //     "Total Indirect": importedClients["Clients"][1]["Programs"][60]["Hours"],
+    //     "Total": importedClients["Clients"][1]["Programs"][61]["Hours"]
+    //   },
+    //   {
+    //     "Client Name": importedClients["Clients"][2]["Client Name"],
+    //     "1- Contact with Youth": importedClients["Clients"][2]["Programs"][0]["Hours"],
+    //     "2 - Court contact": importedClients["Clients"][2]["Programs"][1]["Hours"],
+    //     "Total Indirect": importedClients["Clients"][2]["Programs"][60]["Hours"],
+    //     "Total": importedClients["Clients"][2]["Programs"][61]["Hours"]
+    //   },
+    //   {
+    //     "Client Name": importedClients["Clients"][3]["Client Name"],
+    //     "1- Contact with Youth": importedClients["Clients"][3]["Programs"][0]["Hours"],
+    //     "2 - Court contact": importedClients["Clients"][3]["Programs"][1]["Hours"],
+    //     "Total Indirect": importedClients["Clients"][3]["Programs"][60]["Hours"],
+    //     "Total": importedClients["Clients"][3]["Programs"][61]["Hours"]
+    //   }
+    // ];
+
+    var dataKeys = [];
+
+    for (let i = 0; i < programs.length; i++) {
+      dataKeys.push(importedClients["Clients"][0]["Programs"][programs[i]]["Name"]);
+    }
+
+    console.log(importedClients["Clients"][0]["Programs"][0]["Name"]);
 
     const MyResponsiveBar = ({ data }) => (
       <ResponsiveBar
@@ -135,8 +156,10 @@ export default class NivoBarGraph extends Component<Props> {
 
     return (
 
-      <div style={{ height: 500, width: 1000 }}>
-        <MyResponsiveBar data={data} />
+      <div>
+        <div style={{ height: 500, width: 1000 }}>
+          <MyResponsiveBar data={data} />
+        </div>
       </div>
     );
   }
