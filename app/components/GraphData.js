@@ -14,18 +14,10 @@ export default class GraphData extends Component<Props> {
   props: Props;
   
   state = {
-    
-  };
-
-  addValue = testVal => {
-
-    console.log("Previous: " + this.state.testVal);
-
-    this.setState({
-      testVal: 6
-    });
-
-    console.log("New: " + this.state.testVal);
+    graphData: "",
+    graphDataKeys: "",
+    programsSelected: "",
+    clientsSelected: ""
   };
 
   /*
@@ -54,9 +46,10 @@ export default class GraphData extends Component<Props> {
     return (
 
       <div style={{ height: 500, width: 1000 }}>
+        <GraphSelect importedClients={this.props.importedClients} importedPrograms={this.props.importedPrograms} selectedPrograms={this.state.programsSelected} selectedClients={this.state.clientsSelected} />
         <Tabs onChange={callback} type="card">
           <TabPane tab="Bar Chart" key="1">
-            <BarGraph data={this.props.importedClients} dataPrograms={this.props.importedPrograms} />
+            <BarGraph clientChange={this.onClientChange} programChange={this.onProgramChange} data={this.props.importedClients} dataPrograms={this.props.importedPrograms} selectedPrograms={this.state.programsSelected} selectedClients={this.state.clientsSelected} />
           </TabPane>
           <TabPane tab="Pie Chart" key="2">
             <PieGraph data={this.props.importedClients} />

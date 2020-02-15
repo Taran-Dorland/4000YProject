@@ -22,17 +22,7 @@ export default class GraphSelect extends Component<Props> {
     var clients = this.props.importedClients;
     var programs = this.props.importedPrograms;
 
-    const { Option } = Select;
-
-    function addOption(arr, jsonArr, keyValue) {
-
-      for (let i = 10; i < jsonArr.length; i++) {
-        console.log(jsonArr[i]);
-        arr += <Option key={keyValue.toString(36)} value={keyValue}></Option>;
-        keyValue++;
-      }
-      return keyValue;
-    }
+    const { Option, OptGroup } = Select;
 
     var angerOptions = [];
     var cogOptions = [];
@@ -42,48 +32,75 @@ export default class GraphSelect extends Component<Props> {
     var totalOptions = [];
     var otherOptions = [];
 
-    var keyVal = 0;
+    var programVal = 0;
 
-    for (let i = 0; i < programs.Anger; i++) {
-      angerOptions.push(<Option key={keyValue.toString(36)} value={keyValue}></Option>);
+    for (let i = 0; i < programs.Anger.length; i++) {
+      angerOptions.push(<Option key={programVal}>{programs.Anger[i]}</Option>);
+      programVal++;
+    }
+    for (let i = 0; i < programs.COGSkills.length; i++) {
+      cogOptions.push(<Option key={programVal}>{programs.COGSkills[i]}</Option>);
+      programVal++;
+    }
+    for (let i = 0; i < programs.Education.length; i++) {
+      eduOptions.push(<Option key={programVal}>{programs.Education[i]}</Option>);
+      programVal++;
+    }
+    for (let i = 0; i < programs.Employment.length; i++) {
+      employOptions.push(<Option key={programVal}>{programs.Employment[i]}</Option>);
+      programVal++;
+    }
+    for (let i = 0; i < programs.Substance.length; i++) {
+      subOptions.push(<Option key={programVal}>{programs.Substance[i]}</Option>);
+      programVal++;
+    }
+    for (let i = 0; i < programs.Other.length; i++) {
+      otherOptions.push(<Option key={programVal}>{programs.Other[i]}</Option>);
+      programVal++;
+    }
+    for (let i = 0; i < programs.Total.length; i++) {
+      totalOptions.push(<Option key={programVal}>{programs.Total[i]}</Option>);
+      programVal++;
     }
 
-    // keyVal = addOption(angerOptions, programs.Anger, keyVal);
-    // keyVal = addOption(cogOptions, programs.COGSkills, keyVal);
-    // keyVal = addOption(eduOptions, programs.Education, keyVal);
-    // keyVal = addOption(employOptions, programs.Employment, keyVal);
-    // keyVal = addOption(subOptions, programs.Substance, keyVal);
-    // keyVal = addOption(totalOptions, programs.Total, keyVal);
-    // keyVal = addOption(otherOptions, programs.Other, keyVal);
+    var clientOptions = [];
 
-    console.log("ANGER OPTIONS: " + angerOptions);
+    var clientVal = 0;
 
-    function handleChange(value) {
+    for (let i = 0; i < clients["Clients"].length; i++) {
 
-      console.log(`selected ${value}`);
-    }
-
-    function handleNameChange(value) {
-
-      for (let i = 0; i < value.length; i++) {
-
-        var dataToAdd = {
-          "Client Name": value[i],
-        }
-
-        data.push(dataToAdd);
-      }
-      console.log(`selected ${value}`);
+      clientOptions.push(<Option key={clientVal}>{clients["Clients"][i]["Client Name"]}</Option>);
+      clientVal++;
     }
 
     return (
 
-      <div style={{ height: 500, width: 1000 }}>
+      <div style={{ height: 150, width: 1000 }}>
 
-        <Select mode="multiple" style={{ width: '50%' }} placeholder="Please select" onChange={handleChange}>
-          {programs.Anger}
+        <Select mode="multiple" style={{ width: '50%' }} placeholder="Anger" onChange={this.props.programChange}>
+          {angerOptions}
         </Select>
-        
+        <Select mode="multiple" style={{ width: '50%' }} placeholder="COG" onChange={this.props.programChange}>
+          {cogOptions}
+        </Select>
+        <Select mode="multiple" style={{ width: '50%' }} placeholder="Education" onChange={this.props.programChange}>
+          {eduOptions}
+        </Select>
+        <Select mode="multiple" style={{ width: '50%' }} placeholder="Employment" onChange={this.props.programChange}>
+          {employOptions}
+        </Select>
+        <Select mode="multiple" style={{ width: '50%' }} placeholder="Substance" onChange={this.props.programChange}>
+          {subOptions}
+        </Select>
+        <Select mode="multiple" style={{ width: '50%' }} placeholder="Other" onChange={this.props.programChange}>
+          {otherOptions}
+        </Select>
+        <Select mode="multiple" style={{ width: '50%' }} placeholder="Total" onChange={this.props.programChange}>
+          {totalOptions}
+        </Select>
+        <Select mode="multiple" style={{ width: '50%' }} placeholder="Clients" onChange={this.props.clientChange}>
+          {clientOptions}
+        </Select>
       </div>
     );
   }
