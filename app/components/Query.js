@@ -135,7 +135,7 @@ export default class Query extends Component<Props>{
 
           </Checkbox.Group>
           
-          {this.state.showAnger ? <p>QUERY FOR ANGER</p> : null}
+          {this.state.showAnger ? QueryData.getProgramClients(QueryData.uploadedData, "ANGER") : null}
           {this.state.showCog ? <p>QUERY FOR COG</p> : null}
           {this.state.showMax3 ? <p>QUERY FOR MAX3</p> : null}
           
