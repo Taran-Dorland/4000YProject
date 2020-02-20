@@ -10,98 +10,37 @@ export default class NivoPieGraph extends Component<Props> {
 
     console.log(this.props.data);
 
-    var thisData = this.props.data;
+    var importedClients = this.props.data;
+    var importedPrograms = this.props.dataPrograms;
 
-    var data = [
-        {
-          "id": thisData["Clients"][0]["Client Name"],
-          "color": "hsl(347, 70%, 50%)",
-          "data": [
-            {
-              "x": thisData["Clients"][0]["Programs"][0]["Name"],
-              "y": thisData["Clients"][0]["Programs"][0]["Hours"]
-            },
-            {
-              "x": thisData["Clients"][0]["Programs"][1]["Name"],
-              "y": thisData["Clients"][0]["Programs"][1]["Hours"]
-            },
-            {
-              "x": thisData["Clients"][0]["Programs"][60]["Name"],
-              "y": thisData["Clients"][0]["Programs"][60]["Hours"]
-            },
-            {
-              "x": thisData["Clients"][0]["Programs"][61]["Name"],
-              "y": thisData["Clients"][0]["Programs"][61]["Hours"]
-            }
-          ]
-        },
-        {
-          "id": thisData["Clients"][1]["Client Name"],
-          "color": "hsl(84, 70%, 50%)",
-          "data": [
-            {
-              "x": thisData["Clients"][1]["Programs"][0]["Name"],
-              "y": thisData["Clients"][1]["Programs"][0]["Hours"]
-            },
-            {
-              "x": thisData["Clients"][1]["Programs"][1]["Name"],
-              "y": thisData["Clients"][1]["Programs"][1]["Hours"]
-            },
-            {
-              "x": thisData["Clients"][1]["Programs"][60]["Name"],
-              "y": thisData["Clients"][1]["Programs"][60]["Hours"]
-            },
-            {
-              "x": thisData["Clients"][1]["Programs"][61]["Name"],
-              "y": thisData["Clients"][1]["Programs"][61]["Hours"]
-            }
-          ]
-        },
-        {
-          "id": thisData["Clients"][2]["Client Name"],
-          "color": "hsl(181, 70%, 50%)",
-          "data": [
-            {
-              "x": thisData["Clients"][2]["Programs"][0]["Name"],
-              "y": thisData["Clients"][2]["Programs"][0]["Hours"]
-            },
-            {
-              "x": thisData["Clients"][2]["Programs"][1]["Name"],
-              "y": thisData["Clients"][2]["Programs"][1]["Hours"]
-            },
-            {
-              "x": thisData["Clients"][2]["Programs"][60]["Name"],
-              "y": thisData["Clients"][2]["Programs"][60]["Hours"]
-            },
-            {
-              "x": thisData["Clients"][2]["Programs"][61]["Name"],
-              "y": thisData["Clients"][2]["Programs"][61]["Hours"]
-            }
-          ]
-        },
-        {
-          "id": thisData["Clients"][3]["Client Name"],
-          "color": "hsl(102, 70%, 50%)",
-          "data": [
-            {
-              "x": thisData["Clients"][3]["Programs"][0]["Name"],
-              "y": thisData["Clients"][3]["Programs"][0]["Hours"]
-            },
-            {
-              "x": thisData["Clients"][3]["Programs"][1]["Name"],
-              "y": thisData["Clients"][3]["Programs"][1]["Hours"]
-            },
-            {
-              "x": thisData["Clients"][3]["Programs"][60]["Name"],
-              "y": thisData["Clients"][3]["Programs"][60]["Hours"]
-            },
-            {
-              "x": thisData["Clients"][3]["Programs"][61]["Name"],
-              "y": thisData["Clients"][3]["Programs"][61]["Hours"]
-            }
-          ]
-        }
-      ];
+    var programs = this.props.selectedPrograms;
+    var clients = this.props.selectedClients;
+
+    var data = [];
+
+    //Push appropriate client and program data
+    //to graph data object
+    for (let i = 0; i < clients.length; i++) {
+
+      var objToPush = {};
+
+      objToPush["id"] = importedClients["Clients"][clients[i]]["Client Name"];
+      objToPush["color"] = "hsl(" + Math.floor(Math.random() * 256) + ", 70%, 50%)";
+
+      var programData = [];
+
+      for (let j = 0; j < programs.length; j++) {
+
+        var graphObj = {};
+
+        graphObj["x"] = importedClients["Clients"][clients[i]]["Programs"][programs[j]]["Name"];
+        graphObj["y"] = importedClients["Clients"][clients[i]]["Programs"][programs[j]]["Hours"];
+        programData.push(graphObj);
+      }
+
+      objToPush["data"] = programData;
+      data.push(objToPush);
+    }
 
     const MyResponsiveLine = ({ data }) => (
         <ResponsiveLine
@@ -116,7 +55,7 @@ export default class NivoPieGraph extends Component<Props> {
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: 'transportation',
+                legend: 'Programs',
                 legendOffset: 36,
                 legendPosition: 'middle'
             }}
@@ -125,7 +64,7 @@ export default class NivoPieGraph extends Component<Props> {
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: 'count',
+                legend: 'Hours',
                 legendOffset: -40,
                 legendPosition: 'middle'
             }}

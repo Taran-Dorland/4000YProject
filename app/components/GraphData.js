@@ -16,8 +16,10 @@ export default class GraphData extends Component<Props> {
   state = {
     graphData: "",
     graphDataKeys: "",
-    programsSelected: "",
-    clientsSelected: ""
+    programsSelected: [],
+    clientsSelected: [],
+    pieProgram: 0,
+    graphKey: 0
   };
 
   /*
@@ -29,6 +31,45 @@ export default class GraphData extends Component<Props> {
 
   //<GraphSelect importedClients={this.props.importedClients} importedPrograms={this.props.importedPrograms} />
 
+  onProgramChange = value => {
+
+    console.log(value);
+
+    var lastProgram = 0;
+    if (value.length > 0) {
+      lastProgram = value[value.length - 1];
+      console.log("LAST PROGRAM: " + lastProgram);
+    }
+
+    this.setState({
+      programsSelected: value,
+      pieProgram: lastProgram
+    });
+  };
+
+  onClientChange = value => {
+
+    console.log(value);
+
+    this.setState({
+      clientsSelected: value
+    });
+  };
+
+  tabKey = key => {
+
+    console.log(key);
+
+    this.setState({
+      graphKey: key
+    });
+  };
+
+  addGraph = () => {
+
+    
+  };
+
   render() {
 
     console.log(this.props.importedClients);
@@ -39,32 +80,26 @@ export default class GraphData extends Component<Props> {
 
     const { TabPane } = Tabs;
 
-    function callback(key) {
-      console.log(key);
-    }
-
     return (
 
       <div style={{ height: 500, width: 1000 }}>
-        <GraphSelect importedClients={this.props.importedClients} importedPrograms={this.props.importedPrograms} selectedPrograms={this.state.programsSelected} selectedClients={this.state.clientsSelected} />
-        <Tabs onChange={callback} type="card">
+        <GraphSelect clientChange={this.onClientChange} programChange={this.onProgramChange} importedClients={this.props.importedClients} importedPrograms={this.props.importedPrograms} />
+        <Tabs onChange={this.tabKey} type="card">
           <TabPane tab="Bar Chart" key="1">
-            <BarGraph clientChange={this.onClientChange} programChange={this.onProgramChange} data={this.props.importedClients} dataPrograms={this.props.importedPrograms} selectedPrograms={this.state.programsSelected} selectedClients={this.state.clientsSelected} />
+            <BarGraph data={this.props.importedClients} dataPrograms={this.props.importedPrograms} selectedPrograms={this.state.programsSelected} selectedClients={this.state.clientsSelected} />
           </TabPane>
           <TabPane tab="Pie Chart" key="2">
-            <PieGraph data={this.props.importedClients} />
+            <PieGraph data={this.props.importedClients} dataPrograms={this.props.importedPrograms} selectedProgram={this.state.pieProgram} selectedClients={this.state.clientsSelected} />
           </TabPane>
           <TabPane tab="Line Chart" key="3">
-            <LineGraph data={this.props.importedClients} />
+            <LineGraph data={this.props.importedClients} dataPrograms={this.props.importedPrograms} selectedPrograms={this.state.programsSelected} selectedClients={this.state.clientsSelected} />
           </TabPane>
         </Tabs>
 
-        <Button shape="round" type="primary">
+        <Button onClick={this.addGraph} shape="round" type="primary">
           Add to report
           <Icon type="right" />
         </Button>
-
-        <Button onClick={this.addValue}></Button>
 
       </div>
     );

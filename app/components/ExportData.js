@@ -5,6 +5,8 @@ import ReactToPdf from "react-to-pdf";
 import NivoGraph from './GraphData';
 import TableData from './TableData';
 import BarGraph from './NivoBarGraph';
+import PieGraph from './NivoPieGraph';
+import LineGraph from './NivoLineGraph';
 
 import * as jsPDF from 'jspdf';
 import * as html2canvas from 'html2canvas';
@@ -27,6 +29,10 @@ export default class ExportData extends Component {
 
   render() {
 
+    var barGraphs = this.props.bars;
+    var pieGraphs = this.props.pies;
+    var lineGraphs = this.props.lines;
+
     const ref = React.createRef();
     const options = {
       orientation: 'portrait',
@@ -40,10 +46,7 @@ export default class ExportData extends Component {
         </Button>
 
         <div id="divToPrint" style={{ width: 1250, height: 1250 }} ref={ref}>
-          <BarGraph data={this.props.importedClients} />
-          <BarGraph data={this.props.importedClients} />
-          <BarGraph data={this.props.importedClients} />
-          <BarGraph data={this.props.importedClients} />
+          
         </div>
       </div>
     );

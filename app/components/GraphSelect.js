@@ -32,6 +32,11 @@ export default class GraphSelect extends Component<Props> {
     var totalOptions = [];
     var otherOptions = [];
 
+    //PROGRAMS DO NOT LINE UP CORRECTLY WHEN BEING SELECTED
+    //programVal is supposed to represent the value of the program
+    //in the importedClients list, however it doesn't due to the
+    //way the values are being pushed here.
+
     var programVal = 0;
 
     for (let i = 0; i < programs.Anger.length; i++) {
@@ -69,7 +74,13 @@ export default class GraphSelect extends Component<Props> {
 
     for (let i = 0; i < clients["Clients"].length; i++) {
 
-      clientOptions.push(<Option key={clientVal}>{clients["Clients"][i]["Client Name"]}</Option>);
+      //Check if name exists
+      var name = clients["Clients"][i]["Client Name"];
+      if (!name || name === "") {
+        name = "Name not specified" + clientVal.toString(36);
+      }
+
+      clientOptions.push(<Option key={clientVal}>{name}</Option>);
       clientVal++;
     }
 

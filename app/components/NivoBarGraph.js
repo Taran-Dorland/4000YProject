@@ -9,8 +9,8 @@ export default class NivoBarGraph extends Component<Props> {
 
   render() {
 
-    console.log(this.props.data);
-    console.log(this.props.dataPrograms);
+    //console.log(this.props.data);
+    //console.log(this.props.dataPrograms);
 
     var importedClients = this.props.data;
 
@@ -19,7 +19,7 @@ export default class NivoBarGraph extends Component<Props> {
 
     var data = [];
 
-    //
+    //Push each data element to graph data
     for (let i = 0; i < clients.length; i++) {
 
       var objToPush = {};
@@ -28,45 +28,18 @@ export default class NivoBarGraph extends Component<Props> {
       
       for (let j = 0; j < programs.length; j++) {
 
+        console.log(programs[j]);
         objToPush[importedClients["Clients"][clients[i]]["Programs"][programs[j]]["Name"].toString(36)] = importedClients["Clients"][clients[i]]["Programs"][programs[j]]["Hours"];
       }
 
+      console.log("OBJ TO PUSH: ");
+      console.log(objToPush);
       data.push(objToPush);
     }
 
-    // var data = [
-    //   {
-    //     "Client Name": importedClients["Clients"][0]["Client Name"],
-    //     "1- Contact with Youth": importedClients["Clients"][0]["Programs"][0]["Hours"],
-    //     "2 - Court contact": importedClients["Clients"][0]["Programs"][1]["Hours"],
-    //     "Total Indirect": importedClients["Clients"][0]["Programs"][60]["Hours"],
-    //     "Total": importedClients["Clients"][0]["Programs"][61]["Hours"]
-    //   },
-    //   {
-    //     "Client Name": importedClients["Clients"][1]["Client Name"],
-    //     "1- Contact with Youth": importedClients["Clients"][1]["Programs"][0]["Hours"],
-    //     "2 - Court contact": importedClients["Clients"][1]["Programs"][1]["Hours"],
-    //     "Total Indirect": importedClients["Clients"][1]["Programs"][60]["Hours"],
-    //     "Total": importedClients["Clients"][1]["Programs"][61]["Hours"]
-    //   },
-    //   {
-    //     "Client Name": importedClients["Clients"][2]["Client Name"],
-    //     "1- Contact with Youth": importedClients["Clients"][2]["Programs"][0]["Hours"],
-    //     "2 - Court contact": importedClients["Clients"][2]["Programs"][1]["Hours"],
-    //     "Total Indirect": importedClients["Clients"][2]["Programs"][60]["Hours"],
-    //     "Total": importedClients["Clients"][2]["Programs"][61]["Hours"]
-    //   },
-    //   {
-    //     "Client Name": importedClients["Clients"][3]["Client Name"],
-    //     "1- Contact with Youth": importedClients["Clients"][3]["Programs"][0]["Hours"],
-    //     "2 - Court contact": importedClients["Clients"][3]["Programs"][1]["Hours"],
-    //     "Total Indirect": importedClients["Clients"][3]["Programs"][60]["Hours"],
-    //     "Total": importedClients["Clients"][3]["Programs"][61]["Hours"]
-    //   }
-    // ];
-
     var dataKeys = [];
 
+    //Push each program name to the graph legend
     for (let i = 0; i < programs.length; i++) {
       dataKeys.push(importedClients["Clients"][0]["Programs"][programs[i]]["Name"]);
     }

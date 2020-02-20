@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import routes from '../constants/routes';
 import FileUploadForm from '../components/FileUploadForm';
-import NivoGraph from '../components/GraphData';
+import GraphData from '../components/GraphData';
 import TableData from '../components/TableData';
 import ExportData from '../components/ExportData';
 //import SideBar from 'react-fixed-sidebar';
@@ -32,6 +32,9 @@ export default class HomePage extends Component<Props> {
     importedPrograms: "",
     button: false,
     key: "1",
+    barGraphs: [],
+    pieGraphs: [],
+    lineGraphs: [],
   };
 
   //Handles the responsive sidebar
@@ -111,10 +114,10 @@ export default class HomePage extends Component<Props> {
     console.log(data);
 
     this.setState({
-        csvData,
-        importedClients: data,
-        importedPrograms: programNames,
-        button: true
+      csvData,
+      importedClients: data,
+      importedPrograms: programNames,
+      button: true
     });
   }
 
@@ -184,23 +187,23 @@ export default class HomePage extends Component<Props> {
       }
     );
   }
-    //Handles query generation state
-    handleQuery = showQuery => {
-      console.log(showQuery);
-      this.setState(
-        {
-          showTable: false,
-          title: "Query Data",
-          subTitle: "",
-          showGraph: false,
-          showQuery,
-          key: "6",
-          showImport: false,
-          showExport: false
-        }
-      );
-    }
-  
+  //Handles query generation state
+  handleQuery = showQuery => {
+    console.log(showQuery);
+    this.setState(
+      {
+        showTable: false,
+        title: "Query Data",
+        subTitle: "",
+        showGraph: false,
+        showQuery,
+        key: "6",
+        showImport: false,
+        showExport: false
+      }
+    );
+  }
+
   clearData = csvData => {
     console.log("Clearing CSV data");
     this.setState(
@@ -249,7 +252,7 @@ export default class HomePage extends Component<Props> {
                 <Menu.Item key="5">
                   <span><Button type="link" icon="setting" disabled={!this.state.button}>Settings</Button></span>
                 </Menu.Item>
-                 <Menu.Item key="6">
+                <Menu.Item key="6">
                   <span><Button type="link" icon="query" onClick={this.handleQuery} disabled={!this.state.button}>Query</Button></span>
                 </Menu.Item>
 
@@ -282,10 +285,10 @@ export default class HomePage extends Component<Props> {
                   </div>
                 </div> : null}
             </div>
-            {this.state.showGraph ? <div style={{ padding: 24 }}> <NivoGraph importedClients={this.state.importedClients} importedPrograms={this.state.importedPrograms} /> </div> : null}
+            {this.state.showGraph ? <GraphData addBar={this.state.barGraphs} addPie={this.state.pieGraphs} addLine={this.state.lineGraphs} importedClients={this.state.importedClients} importedPrograms={this.state.importedPrograms} /> : null}
             {this.state.showTable ? <TableData csvData={this.state.csvData} importedClients={this.state.importedClients} /> : null}
-            {this.state.showExport ? <ExportData importedClients={this.state.importedClients} /> : null}
-            {this.state.showQuery ? <Query/> : null}
+            {this.state.showExport ? <ExportData importedClients={this.state.importedClients} bars={this.state.barGraphs} pies={this.state.pieGraphs} lines={this.state.lineGraphs} /> : null}
+            {this.state.showQuery ? <Query /> : null}
           </Content>
           <Footer style={{ textAlign: 'center' }}>DMUⒸ REACT VERSION: {REACT_VERSION} NODE VERSION: {process.version}</Footer>
         </Layout>

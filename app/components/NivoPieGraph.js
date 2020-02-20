@@ -10,34 +10,28 @@ export default class NivoPieGraph extends Component<Props> {
 
     console.log(this.props.data);
 
-    var thisData = this.props.data;
+    var importedPrograms = this.props.dataPrograms;
 
-    var data = [
-        {
-          "id": thisData["Clients"][0]["Client Name"],
-          "label": thisData["Clients"][0]["Client Name"],
-          "value": thisData["Clients"][0]["Programs"][61]["Hours"],
-          "color": "hsl(12, 70%, 50%)"
-        },
-        {
-          "id": thisData["Clients"][1]["Client Name"],
-          "label": thisData["Clients"][1]["Client Name"],
-          "value": thisData["Clients"][1]["Programs"][61]["Hours"],
-          "color": "hsl(214, 70%, 50%)"
-        },
-        {
-          "id": thisData["Clients"][2]["Client Name"],
-          "label": thisData["Clients"][2]["Client Name"],
-          "value": thisData["Clients"][2]["Programs"][61]["Hours"],
-          "color": "hsl(150, 70%, 50%)"
-        },
-        {
-          "id": thisData["Clients"][3]["Client Name"],
-          "label": thisData["Clients"][3]["Client Name"],
-          "value": thisData["Clients"][3]["Programs"][61]["Hours"],
-          "color": "hsl(247, 70%, 50%)"
-        }
-      ];
+    var clients = this.props.selectedClients;
+    var program = this.props.selectedProgram;
+
+    var importedClients = this.props.data;
+
+    var data = [];
+
+    for (let i = 0; i < clients.length; i++) {
+
+        var objToPush = {};
+
+        objToPush["id"] = importedClients["Clients"][clients[i]]["Client Name"];
+        objToPush["label"] = importedClients["Clients"][clients[i]]["Client Name"];
+        objToPush["value"] = importedClients["Clients"][clients[i]]["Programs"][program]["Hours"];
+        objToPush["color"] = "hsl(" + Math.floor(Math.random() * 256) + ", 70%, 50%)";
+    
+        console.log(objToPush);
+        data.push(objToPush);
+    }
+
 
     const MyResponsivePie = ({ data }) => (
         <ResponsivePie
