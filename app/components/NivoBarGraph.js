@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button, Icon } from 'antd';
 import { ResponsiveBar } from '@nivo/bar';
 import GraphSelect from './GraphSelect';
 
@@ -7,10 +8,14 @@ type Props = {};
 export default class NivoBarGraph extends Component<Props> {
   props: Props;
 
-  render() {
+  GraphObject = {};
 
-    //console.log(this.props.data);
-    //console.log(this.props.dataPrograms);
+  addGraph = () => {
+    console.log("ON CLICK");
+    this.props.graph(this.GraphObject);
+  }
+
+  render() {
 
     var importedClients = this.props.data;
 
@@ -45,6 +50,10 @@ export default class NivoBarGraph extends Component<Props> {
     }
 
     console.log(importedClients["Clients"][0]["Programs"][0]["Name"]);
+
+    //Add object to be transferred to export page
+    var GraphObject = {};
+    GraphObject["type"] = "Bar";
 
     const MyResponsiveBar = ({ data }) => (
       <ResponsiveBar
@@ -127,12 +136,21 @@ export default class NivoBarGraph extends Component<Props> {
       />
     )
 
+    GraphObject["data"] = data;
+    GraphObject["dataKeys"] = dataKeys;
+
+    this.GraphObject = GraphObject;
+
     return (
 
       <div>
         <div style={{ height: 500, width: 1000 }}>
           <MyResponsiveBar data={data} />
         </div>
+        <Button onClick={this.addGraph} shape="round" type="primary">
+          Add to report
+          <Icon type="right" />
+        </Button>
       </div>
     );
   }

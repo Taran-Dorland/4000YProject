@@ -6,6 +6,10 @@ type Props = {};
 export default class NivoPieGraph extends Component<Props> {
   props: Props;
 
+  /*
+    Line graph stacks previous values on top of each other
+  */
+
   render() {
 
     console.log(this.props.data);
@@ -35,6 +39,7 @@ export default class NivoPieGraph extends Component<Props> {
 
         graphObj["x"] = importedClients["Clients"][clients[i]]["Programs"][programs[j]]["Name"];
         graphObj["y"] = importedClients["Clients"][clients[i]]["Programs"][programs[j]]["Hours"];
+        
         programData.push(graphObj);
       }
 

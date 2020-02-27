@@ -32,9 +32,7 @@ export default class HomePage extends Component<Props> {
     importedPrograms: "",
     button: false,
     key: "1",
-    barGraphs: [],
-    pieGraphs: [],
-    lineGraphs: [],
+    graphs: []
   };
 
   //Handles the responsive sidebar
@@ -214,6 +212,17 @@ export default class HomePage extends Component<Props> {
     );
   }
 
+  //Handles the return from graph page
+  //Adds the graph object to the array of graph objects
+  //to be displayed on the export page
+  updateExportGraphs = graphObj => {
+    this.setState({
+      graphs: this.state.graphs.concat(graphObj)
+    });
+
+    console.log(this.state.graphs);
+  }
+
   /*
     Docs for Antd Layouts: https://ant.design/components/layout/
     Summary:  Renders the app layout, including the sidebar. Also loads the FileUploadForm component
@@ -285,9 +294,9 @@ export default class HomePage extends Component<Props> {
                   </div>
                 </div> : null}
             </div>
-            {this.state.showGraph ? <GraphData addBar={this.state.barGraphs} addPie={this.state.pieGraphs} addLine={this.state.lineGraphs} importedClients={this.state.importedClients} importedPrograms={this.state.importedPrograms} /> : null}
+            {this.state.showGraph ? <GraphData updateGraphs={this.updateExportGraphs} importedClients={this.state.importedClients} importedPrograms={this.state.importedPrograms} /> : null}
             {this.state.showTable ? <TableData csvData={this.state.csvData} importedClients={this.state.importedClients} /> : null}
-            {this.state.showExport ? <ExportData importedClients={this.state.importedClients} bars={this.state.barGraphs} pies={this.state.pieGraphs} lines={this.state.lineGraphs} /> : null}
+            {this.state.showExport ? <ExportData graphs={this.state.graphs} exportedGraphs={this.state.graphs} importedClients={this.state.importedClients} /> : null}
             {this.state.showQuery ? <Query /> : null}
           </Content>
           <Footer style={{ textAlign: 'center' }}>DMUⒸ REACT VERSION: {REACT_VERSION} NODE VERSION: {process.version}</Footer>
