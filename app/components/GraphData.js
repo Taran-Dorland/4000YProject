@@ -65,11 +65,6 @@ export default class GraphData extends Component<Props> {
     });
   };
 
-  addGraph = () => {
-
-    
-  };
-
   render() {
 
     console.log(this.props.importedClients);
@@ -86,7 +81,7 @@ export default class GraphData extends Component<Props> {
         <GraphSelect clientChange={this.onClientChange} programChange={this.onProgramChange} importedClients={this.props.importedClients} importedPrograms={this.props.importedPrograms} />
         <Tabs onChange={this.tabKey} type="card">
           <TabPane tab="Bar Chart" key="1">
-            <BarGraph data={this.props.importedClients} dataPrograms={this.props.importedPrograms} selectedPrograms={this.state.programsSelected} selectedClients={this.state.clientsSelected} />
+            <BarGraph graph={this.props.updateGraphs} data={this.props.importedClients} dataPrograms={this.props.importedPrograms} selectedPrograms={this.state.programsSelected} selectedClients={this.state.clientsSelected} />
           </TabPane>
           <TabPane tab="Pie Chart" key="2">
             <PieGraph data={this.props.importedClients} dataPrograms={this.props.importedPrograms} selectedProgram={this.state.pieProgram} selectedClients={this.state.clientsSelected} />
@@ -95,11 +90,6 @@ export default class GraphData extends Component<Props> {
             <LineGraph data={this.props.importedClients} dataPrograms={this.props.importedPrograms} selectedPrograms={this.state.programsSelected} selectedClients={this.state.clientsSelected} />
           </TabPane>
         </Tabs>
-
-        <Button onClick={this.addGraph} shape="round" type="primary">
-          Add to report
-          <Icon type="right" />
-        </Button>
 
       </div>
     );
