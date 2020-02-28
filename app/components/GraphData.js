@@ -84,10 +84,10 @@ export default class GraphData extends Component<Props> {
             <BarGraph graph={this.props.updateGraphs} data={this.props.importedClients} dataPrograms={this.props.importedPrograms} selectedPrograms={this.state.programsSelected} selectedClients={this.state.clientsSelected} />
           </TabPane>
           <TabPane tab="Pie Chart" key="2">
-            <PieGraph data={this.props.importedClients} dataPrograms={this.props.importedPrograms} selectedProgram={this.state.pieProgram} selectedClients={this.state.clientsSelected} />
+            <PieGraph graph={this.props.updateGraphs} data={this.props.importedClients} dataPrograms={this.props.importedPrograms} selectedProgram={this.state.pieProgram} selectedClients={this.state.clientsSelected} />
           </TabPane>
           <TabPane tab="Line Chart" key="3">
-            <LineGraph data={this.props.importedClients} dataPrograms={this.props.importedPrograms} selectedPrograms={this.state.programsSelected} selectedClients={this.state.clientsSelected} />
+            <LineGraph graph={this.props.updateGraphs} data={this.props.importedClients} dataPrograms={this.props.importedPrograms} selectedPrograms={this.state.programsSelected} selectedClients={this.state.clientsSelected} />
           </TabPane>
         </Tabs>
 

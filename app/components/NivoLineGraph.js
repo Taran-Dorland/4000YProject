@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { ResponsiveLine } from '@nivo/line'
+import { Button, Icon } from 'antd';
+import { ResponsiveLine } from '@nivo/line';
 
 type Props = {};
 
@@ -9,6 +10,14 @@ export default class NivoPieGraph extends Component<Props> {
   /*
     Line graph stacks previous values on top of each other
   */
+
+  GraphObject = {};
+
+  addGraph = () => {
+      console.log("ON CLICK");
+      this.props.graph(this.GraphObject);
+  }
+
 
   render() {
 
@@ -46,6 +55,10 @@ export default class NivoPieGraph extends Component<Props> {
       objToPush["data"] = programData;
       data.push(objToPush);
     }
+
+    var GraphObject = {};
+    GraphObject["type"] = "Line";
+    GraphObject["data"] = data;
 
     const MyResponsiveLine = ({ data }) => (
         <ResponsiveLine
@@ -110,9 +123,17 @@ export default class NivoPieGraph extends Component<Props> {
         />
     )
 
+    this.GraphObject = GraphObject;
+
     return(
-        <div style={{ height: 500, width: 1000 }}>
-            <MyResponsiveLine data={data} />
+        <div>
+            <div style={{ height: 500, width: 1000 }}>
+                <MyResponsiveLine data={data} />
+            </div>
+            <Button onClick={this.addGraph} shape="round" type="primary">
+                Add to report
+                <Icon type="right" />
+            </Button>
         </div>
     );
   }

@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
-import { ResponsivePie } from '@nivo/pie'
+import { Button, Icon } from 'antd';
+import { ResponsivePie } from '@nivo/pie';
 
 type Props = {};
 
 export default class NivoPieGraph extends Component<Props> {
   props: Props;
+
+  GraphObject = {};
+
+  addGraph = () => {
+      console.log("ON CLICK");
+      this.props.graph(this.GraphObject);
+  }
 
   render() {
 
@@ -32,6 +40,9 @@ export default class NivoPieGraph extends Component<Props> {
         data.push(objToPush);
     }
 
+    var GraphObject = {};
+    GraphObject["type"] = "Pie";
+    GraphObject["data"] = data;
 
     const MyResponsivePie = ({ data }) => (
         <ResponsivePie
@@ -149,9 +160,17 @@ export default class NivoPieGraph extends Component<Props> {
         />
     )
 
+    this.GraphObject = GraphObject;
+
     return(
-        <div style={{ height: 500, width: 1000 }}>
-            <MyResponsivePie data={data} />
+        <div>
+            <div style={{ height: 500, width: 1000 }}>
+                <MyResponsivePie data={data} />
+            </div>
+            <Button onClick={this.addGraph} shape="round" type="primary">
+                Add to report
+                <Icon type="right" />
+            </Button>
         </div>
     );
   }
