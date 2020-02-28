@@ -245,7 +245,8 @@ export default class HomePage extends Component<Props> {
           }}>
 
             <div className="logo" >
-              <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" selectedKeys={this.state.key}>
+              <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" select
+              edKeys={this.state.key}>
                 <Menu.Item key="1">
                   <span><Button type="link" icon="home" onClick={this.handleHome}>Home</Button></span>
                 </Menu.Item>
