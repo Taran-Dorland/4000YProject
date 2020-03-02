@@ -298,7 +298,7 @@ export default class HomePage extends Component<Props> {
             {this.state.showGraph ? <GraphData updateGraphs={this.updateExportGraphs} importedClients={this.state.importedClients} importedPrograms={this.state.importedPrograms} /> : null}
             {this.state.showTable ? <TableData csvData={this.state.csvData} importedClients={this.state.importedClients} /> : null}
             {this.state.showExport ? <ExportData graphs={this.state.graphs} exportedGraphs={this.state.graphs} importedClients={this.state.importedClients} /> : null}
-            {this.state.showQuery ? <Query /> : null}
+            {this.state.showQuery ? <Query csvData={this.state.csvData} importedClients={this.state.importedClients} /> : null}
           </Content>
           <Footer style={{ textAlign: 'center' }}>DMUⒸ REACT VERSION: {REACT_VERSION} NODE VERSION: {process.version}</Footer>
         </Layout>
