@@ -32,8 +32,24 @@ export default class HomePage extends Component<Props> {
     importedPrograms: "",
     button: false,
     key: "1",
-    graphs: []
+    graphs: [],
+    graphId: 1
   };
+
+  getProgramClients(importedData, programName) {
+    
+    let outputClients = importedData.filter(function (client) {
+        return client.Programs.filter(function (program) { 
+          return Object.keys(program)[0].toLowerCase().startsWith(programName.toLowerCase()) && Number(program[Object.keys(program)[0]]) > 0; }).length > 0;
+      });
+
+    //remove last totals element
+    if (outputClients.length > 0 && outputClients[outputClients.length - 1]["Client Name"] == "Totals") {
+      outputClients.pop();
+    }
+
+    return outputClients;
+  }
 
   //Handles the responsive sidebar
   onCollapse = collapsed => {
@@ -117,6 +133,8 @@ export default class HomePage extends Component<Props> {
       importedPrograms: programNames,
       button: true
     });
+
+    console.log(this.getProgramClients(this.state.importedClients, "ANGER"));
   }
 
   //
@@ -216,8 +234,13 @@ export default class HomePage extends Component<Props> {
   //Adds the graph object to the array of graph objects
   //to be displayed on the export page
   updateExportGraphs = graphObj => {
+
+    graphObj["id"] = this.state.graphId;
+    var newGraphId = this.state.graphId + 1;
+
     this.setState({
-      graphs: this.state.graphs.concat(graphObj)
+      graphs: this.state.graphs.concat(graphObj),
+      graphId: newGraphId
     });
 
     console.log(this.state.graphs);
@@ -283,11 +306,11 @@ export default class HomePage extends Component<Props> {
                 <div style={{ padding: 24, display: "flex", flexDirection: "column", background: '#fff', alignItems: "center" }}>
 
                   <img src="img/Dalhousie-Header4.png" alt="DMU" />
-                  <div style={{ padding: 10, display: "flex", flexDirection: "column", background: '#1890ff', alignItems: "center", borderRadius: 5, margin: 20 }}>
+                  <div style={{ padding: 10, display: "flex", flexDirection: "column", background: '#1890ff', alignItems: "center", borderRadius: 5, margin: 20, width: "50em" }}>
                     <p>WELCOME!</p>
-                    <h3>Welcome to the Dalhousie Youth Services App!<br></br>This application generates modifiable reports that <br></br>
-                      contain graphs and chart that show monthly, quaterly, <br></br>
-                      and/or yearly reports. Please put your desired <br></br>CSV file for converting
+                    <h3>Welcome to the Dalhousie Youth Services App! This application generates modifiable reports that
+                      contain graphs and chart that show monthly, quaterly, 
+                      and/or yearly reports. Please put your desired CSV file for converting
                      </h3>
 
                     <FileUploadForm getCsvData={this.handleCsvData} />
