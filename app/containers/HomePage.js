@@ -8,7 +8,7 @@ import TableData from '../components/TableData';
 import ExportData from '../components/ExportData';
 //import SideBar from 'react-fixed-sidebar';
 import { Button, PageHeader, Layout, Menu, Breadcrumb, Icon } from 'antd';
-import Query from '../components/Query';
+import Query from '../components/QueryShit';
 
 type Props = {};
 
@@ -35,21 +35,6 @@ export default class HomePage extends Component<Props> {
     graphs: [],
     graphId: 1
   };
-
-  getProgramClients(importedData, programName) {
-    
-    let outputClients = importedData.filter(function (client) {
-        return client.Programs.filter(function (program) { 
-          return Object.keys(program)[0].toLowerCase().startsWith(programName.toLowerCase()) && Number(program[Object.keys(program)[0]]) > 0; }).length > 0;
-      });
-
-    //remove last totals element
-    if (outputClients.length > 0 && outputClients[outputClients.length - 1]["Client Name"] == "Totals") {
-      outputClients.pop();
-    }
-
-    return outputClients;
-  }
 
   //Handles the responsive sidebar
   onCollapse = collapsed => {
@@ -133,8 +118,6 @@ export default class HomePage extends Component<Props> {
       importedPrograms: programNames,
       button: true
     });
-
-    console.log(this.getProgramClients(this.state.importedClients, "ANGER"));
   }
 
   //
@@ -312,7 +295,6 @@ export default class HomePage extends Component<Props> {
                       contain graphs and chart that show monthly, quaterly, 
                       and/or yearly reports. Please put your desired CSV file for converting
                      </h3>
-
                     <FileUploadForm getCsvData={this.handleCsvData} />
                     <Button onClick={this.clearData}>Clear CSV</Button>
                   </div>
@@ -321,7 +303,7 @@ export default class HomePage extends Component<Props> {
             {this.state.showGraph ? <GraphData updateGraphs={this.updateExportGraphs} importedClients={this.state.importedClients} importedPrograms={this.state.importedPrograms} /> : null}
             {this.state.showTable ? <TableData csvData={this.state.csvData} importedClients={this.state.importedClients} /> : null}
             {this.state.showExport ? <ExportData graphs={this.state.graphs} exportedGraphs={this.state.graphs} importedClients={this.state.importedClients} /> : null}
-            {this.state.showQuery ? <Query csvData={this.state.csvData} importedClients={this.state.importedClients} /> : null}
+            {this.state.showQuery ? <Query importedClients={this.state.importedClients} importedPrograms={this.state.importedPrograms} /> : null}
           </Content>
           <Footer style={{ textAlign: 'center' }}>DMUⒸ REACT VERSION: {REACT_VERSION} NODE VERSION: {process.version}</Footer>
         </Layout>

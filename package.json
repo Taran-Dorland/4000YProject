@@ -65,7 +65,8 @@
       "app.html",
       "main.prod.js",
       "main.prod.js.map",
-      "package.json"
+      "package.json",
+      "img/"
     ],
     "dmg": {
       "contents": [
