@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Button, Icon } from 'antd';
+import QueryTable from './QueryTable';
 
 type Props = {};
 
@@ -13,14 +14,16 @@ export default class QueryShit extends Component<Props>{
     state = {
         importedClients: [],
         importedPrograms: [],
-        showData: false
+        showData: false,
+        buttonText: "Show data"
     };
 
     getClients = (arr, clients) => {
 
         var returnArr = [];
 
-        for (let i = 0; i < clients.length; i++) {
+        //-2 to remove the totals and blank names
+        for (let i = 0; i < clients.length - 2; i++) {
             for (let j = 0; j < clients[i]["Programs"].length; j++) {
                 for (let k = 0; k < arr.length; k++) {
 
@@ -49,32 +52,32 @@ export default class QueryShit extends Component<Props>{
             importedPrograms: programs,
             tableData: [
                 {
-                    "category": "Anger",
-                    "clients": this.getClients(programs.Anger, clients)
+                    "Category": "Anger",
+                    "Clients": this.getClients(programs.Anger, clients)
                 },
                 {
-                    "category": "COG Skills",
-                    "clients": this.getClients(programs.COGSkills, clients)
+                    "Category": "COG Skills",
+                    "Clients": this.getClients(programs.COGSkills, clients)
                 },
                 {
-                    "category": "Education",
-                    "clients": this.getClients(programs.Education, clients)
+                    "Category": "Education",
+                    "Clients": this.getClients(programs.Education, clients)
                 },
                 {
-                    "category": "Employment",
-                    "clients": this.getClients(programs.Employment, clients)
+                    "Category": "Employment",
+                    "Clients": this.getClients(programs.Employment, clients)
                 },
                 {
-                    "category": "Substance",
-                    "clients": this.getClients(programs.Substance, clients)
+                    "Category": "Substance",
+                    "Clients": this.getClients(programs.Substance, clients)
                 },
                 {
-                    "category": "Total",
-                    "clients": this.getClients(programs.Total, clients)
+                    "Category": "Total",
+                    "Clients": this.getClients(programs.Total, clients)
                 },
                 {
-                    "category": "Other",
-                    "clients": this.getClients(programs.Other, clients)
+                    "Category": "Other",
+                    "Clients": this.getClients(programs.Other, clients)
                 }
             ]
         });
@@ -83,8 +86,18 @@ export default class QueryShit extends Component<Props>{
     handleData = showData => {
         this.updateShit();
         console.log(this.state.tableData);
+
+        var btnText = "";
+
+        if (this.state.buttonText === 'Show data') {
+            btnText = "Hide data";
+        } else {
+            btnText = "Show data";
+        }
+
         this.setState({
-            showData: !this.state.showData
+            showData: !this.state.showData,
+            buttonText: btnText
         });
     }
 
@@ -95,13 +108,11 @@ export default class QueryShit extends Component<Props>{
 
         return (
             <div>
+                {this.state.showData ? <QueryTable dataToShow={this.state.tableData} /> : null}
                 <Button onClick={this.handleData} shape="round" type="primary">
-                    CALC SHIT
+                    {this.state.buttonText}
                 <Icon type="right" />
                 </Button>
-                <p>
-                    {this.state.showData ? JSON.stringify(this.state.tableData) : null}
-                </p>
             </div>
         );
     }

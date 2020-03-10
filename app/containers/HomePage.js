@@ -8,7 +8,7 @@ import TableData from '../components/TableData';
 import ExportData from '../components/ExportData';
 //import SideBar from 'react-fixed-sidebar';
 import { Button, PageHeader, Layout, Menu, Breadcrumb, Icon } from 'antd';
-import Query from '../components/QueryShit';
+import Query from '../components/QueryImportedData';
 
 type Props = {};
 
@@ -203,6 +203,10 @@ export default class HomePage extends Component<Props> {
     );
   }
 
+  handleExit = () => {
+    window.close();
+  }
+
   clearData = csvData => {
     console.log("Clearing CSV data");
     this.setState(
@@ -266,12 +270,14 @@ export default class HomePage extends Component<Props> {
                   <span><Button type="link" icon="export" onClick={this.handleExport} disabled={!this.state.button}>Export</Button></span>
                 </Menu.Item>
                 <Menu.Item key="5">
-                  <span><Button type="link" icon="setting" disabled={!this.state.button}>Settings</Button></span>
+                  <span><Button type="link" icon="search" onClick={this.handleQuery} disabled={!this.state.button}>Query</Button></span>
                 </Menu.Item>
                 <Menu.Item key="6">
-                  <span><Button type="link" icon="query" onClick={this.handleQuery} disabled={!this.state.button}>Query</Button></span>
+                  <span><Button type="link" icon="setting" disabled={!this.state.button}>Settings</Button></span>
                 </Menu.Item>
-
+                <Menu.Item key="7">
+                  <span><Button type="link" icon="close" onClick={this.handleExit} disabled={!this.state.button}>Exit</Button></span>
+                </Menu.Item>
               </Menu>
             </div>
           </Sider>
