@@ -1,13 +1,36 @@
+/*  COIS-4000Y Final Project - DYSS DMU Extension Utility
+    Name: DYSS DMU Extension Utility
+    Written by: 
+
+    Purpose: Receives imported data in the form of a .csv file
+             exported from the DYSS existing system, and parses
+             and processes the datato generate tables, graphs, 
+             and information that is useful for the 
+             generation of reports.
+
+    Parameters: N/A
+
+    Required libraries:
+      - Ant Design https://ant.design/docs/react/introduce
+      - React https://reactjs.org/docs/getting-started.html
+      - React boilerplate https://github.com/electron-react-boilerplate/electron-react-boilerplate
+      - Nivo Charts https://github.com/plouc/nivo
+      - React import .csv https://www.npmjs.com/package/react-csv-reader
+      - React to .pdf https://www.npmjs.com/package/react-to-pdf
+
+      :- View package.json for other additional libraries required
+*/
 // @flow
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import routes from '../constants/routes';
 import FileUploadForm from '../components/FileUploadForm';
-import NivoGraph from '../components/GraphData';
+import GraphData from '../components/GraphData';
 import TableData from '../components/TableData';
 import ExportData from '../components/ExportData';
 //import SideBar from 'react-fixed-sidebar';
 import { Button, PageHeader, Layout, Menu, Breadcrumb, Icon } from 'antd';
+import Query from '../components/QueryImportedData';
 
 type Props = {};
 
@@ -25,9 +48,14 @@ export default class HomePage extends Component<Props> {
     showImport: true,
     showTable: false,
     showExport: false,
+    showQuery: false,
     csvData: "",
+    importedClients: "",
+    importedPrograms: "",
     button: false,
     key: "1",
+    graphs: [],
+    graphId: 1
   };
 
   //Handles the responsive sidebar
@@ -40,11 +68,78 @@ export default class HomePage extends Component<Props> {
 
   //Handles button state and gets csv data
   handleCsvData = csvData => {
-    //console.log(csvData);
-    this.setState({ csvData });
-    this.setState({ button: true });
+    console.log(csvData);
 
-    //console.log(csvData[0]);
+    var data = {};
+    data.Clients = [];
+
+    var programNames = {};
+    programNames.Anger = [];
+    programNames.COGSkills = [];
+    programNames.Education = [];
+    programNames.Employment = [];
+    programNames.Substance = [];
+    programNames.Total = [];
+    programNames.Other = [];
+
+    //Push program names to a separate JS Object
+    for (let i = 5; i < csvData[0].length; i++) {
+
+      var str = csvData[0][i];
+      var strChk = str.toUpperCase();
+
+      //Push program names to new JS Object
+      if (strChk.substring(0, 5) === "ANGER") {
+        programNames.Anger.push(str);
+      } else if (strChk.substring(0, 10) === "COG SKILLS" || strChk.substring(0, 11) === "COG SKIILLS") {
+        programNames.COGSkills.push(str);
+      } else if (strChk.substring(0, 9) === "EDUCATION") {
+        programNames.Education.push(str);
+      } else if (strChk.substring(0, 10) === "EMPLOYMENT") {
+        programNames.Employment.push(str);
+      } else if (strChk.substring(0, 9) === "SUBSTANCE") {
+        programNames.Substance.push(str);
+      } else if (strChk.substring(0, 5) === "TOTAL" || strChk.substring(0, 14) === "TOTAL INDIRECT") {
+        programNames.Total.push(str);
+      } else {
+        programNames.Other.push(str);
+      }
+    }
+
+    console.log(programNames);
+
+    for (let i = 1; i < csvData.length; i++) {
+
+      var programs = [];
+
+      for (let j = 5; j < csvData[i].length; j++) {
+
+        //Push program name and hours
+        programs.push({
+          "Name": csvData[0][j],
+          "Hours": csvData[i][j]
+        });
+      }
+
+      //Push Name, DOB, etc.
+      data.Clients.push({
+        [csvData[0][0]]: csvData[i][0],
+        [csvData[0][1]]: csvData[i][1],
+        [csvData[0][2]]: csvData[i][2],
+        [csvData[0][3]]: csvData[i][3],
+        [csvData[0][4]]: csvData[i][4],
+        "Programs": programs
+      });
+    }
+
+    console.log(data);
+
+    this.setState({
+      csvData,
+      importedClients: data,
+      importedPrograms: programNames,
+      button: true
+    });
   }
 
   //
@@ -57,6 +152,7 @@ export default class HomePage extends Component<Props> {
         subTitle: "Import Data",
         showGraph: false,
         showTable: false,
+        showQuery: false,
         showExport: false,
         key: "1"
       }
@@ -74,6 +170,7 @@ export default class HomePage extends Component<Props> {
         showGraph,
         key: "2",
         showImport: false,
+        showQuery: false,
         showExport: false
       }
     );
@@ -90,6 +187,7 @@ export default class HomePage extends Component<Props> {
         showTable,
         key: "3",
         showImport: false,
+        showQuery: false,
         showExport: false
       }
     );
@@ -101,6 +199,7 @@ export default class HomePage extends Component<Props> {
       {
         showGraph: false,
         showTable: false,
+        showQuery: false,
         title: "Export Page",
         subTitle: "",
         showExport,
@@ -109,6 +208,27 @@ export default class HomePage extends Component<Props> {
       }
     );
   }
+  //Handles query generation state
+  handleQuery = showQuery => {
+    console.log(showQuery);
+    this.setState(
+      {
+        showTable: false,
+        title: "Query Data",
+        subTitle: "",
+        showGraph: false,
+        showQuery,
+        key: "6",
+        showImport: false,
+        showExport: false
+      }
+    );
+  }
+
+  handleExit = () => {
+    window.close();
+  }
+
   clearData = csvData => {
     console.log("Clearing CSV data");
     this.setState(
@@ -119,9 +239,24 @@ export default class HomePage extends Component<Props> {
     );
   }
 
+  //Handles the return from graph page
+  //Adds the graph object to the array of graph objects
+  //to be displayed on the export page
+  updateExportGraphs = graphObj => {
+
+    graphObj["id"] = this.state.graphId;
+    var newGraphId = this.state.graphId + 1;
+
+    this.setState({
+      graphs: this.state.graphs.concat(graphObj),
+      graphId: newGraphId
+    });
+
+    console.log(this.state.graphs);
+  }
+
   /*
     Docs for Antd Layouts: https://ant.design/components/layout/
-
     Summary:  Renders the app layout, including the sidebar. Also loads the FileUploadForm component
               into the a div displayed on the main page.
   */
@@ -134,7 +269,7 @@ export default class HomePage extends Component<Props> {
       <Layout style={{ minHeight: '100vh' }}>
 
         <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
-          <Sider style={{
+          <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse} style={{
             overflow: 'auto',
             height: '100vh',
             position: 'fixed',
@@ -142,7 +277,8 @@ export default class HomePage extends Component<Props> {
           }}>
 
             <div className="logo" >
-              <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" selectedKeys={this.state.key}>
+              <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" select
+              edKeys={this.state.key}>
                 <Menu.Item key="1">
                   <span><Button type="link" icon="home" onClick={this.handleHome}>Home</Button></span>
                 </Menu.Item>
@@ -156,7 +292,13 @@ export default class HomePage extends Component<Props> {
                   <span><Button type="link" icon="export" onClick={this.handleExport} disabled={!this.state.button}>Export</Button></span>
                 </Menu.Item>
                 <Menu.Item key="5">
+                  <span><Button type="link" icon="search" onClick={this.handleQuery} disabled={!this.state.button}>Query</Button></span>
+                </Menu.Item>
+                <Menu.Item key="6">
                   <span><Button type="link" icon="setting" disabled={!this.state.button}>Settings</Button></span>
+                </Menu.Item>
+                <Menu.Item key="7">
+                  <span><Button type="link" icon="close" onClick={this.handleExit} disabled={!this.state.button}>Exit</Button></span>
                 </Menu.Item>
               </Menu>
             </div>
@@ -175,23 +317,23 @@ export default class HomePage extends Component<Props> {
                 <div style={{ padding: 24, display: "flex", flexDirection: "column", background: '#fff', alignItems: "center" }}>
 
                   <img src="img/Dalhousie-Header4.png" alt="DMU" />
-                  <div style={{ padding: 10, display: "flex", flexDirection: "column", background: '#1890ff', alignItems: "center", borderRadius: 5, margin: 20 }}>
+                  <div style={{ padding: 10, display: "flex", flexDirection: "column", background: '#1890ff', alignItems: "center", borderRadius: 5, margin: 20, width: "50em" }}>
                     <p>WELCOME!</p>
-                    <h3>Welcome to the Dalhousie Youth Services App!<br></br>This application generates modifiable reports that <br></br>
-                      contain graphs and chart that show monthly, quaterly, <br></br>
-                      and/or yearly reports. Please put your desired <br></br>CSV file for converting
+                    <h3>Welcome to the Dalhousie Youth Services App! This application generates modifiable reports that
+                      contain graphs and chart that show monthly, quaterly, 
+                      and/or yearly reports. Please put your desired CSV file for converting
                      </h3>
-
                     <FileUploadForm getCsvData={this.handleCsvData} />
                     <Button onClick={this.clearData}>Clear CSV</Button>
                   </div>
                 </div> : null}
             </div>
-            {this.state.showGraph ? <div style={{ padding: 24 }}> <NivoGraph csvData={this.state.csvData} /> </div> : null}
-            {this.state.showTable ? <TableData csvData={this.state.csvData} /> : null}
-            {this.state.showExport ? <ExportData csvData={this.state.csvData} /> : null}
+            {this.state.showGraph ? <GraphData updateGraphs={this.updateExportGraphs} importedClients={this.state.importedClients} importedPrograms={this.state.importedPrograms} /> : null}
+            {this.state.showTable ? <TableData csvData={this.state.csvData} importedClients={this.state.importedClients} /> : null}
+            {this.state.showExport ? <ExportData graphs={this.state.graphs} exportedGraphs={this.state.graphs} importedClients={this.state.importedClients} /> : null}
+            {this.state.showQuery ? <Query importedClients={this.state.importedClients} importedPrograms={this.state.importedPrograms} /> : null}
           </Content>
-          <Footer style={{ textAlign: 'center' }}>DMUⒸ REACT VERSION: {REACT_VERSION}</Footer>
+          <Footer style={{ textAlign: 'center' }}>DMUⒸ REACT VERSION: {REACT_VERSION} NODE VERSION: {process.version}</Footer>
         </Layout>
       </Layout>
     );

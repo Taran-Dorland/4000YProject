@@ -1,8 +1,8 @@
 {
   "name": "dyss_dmu_export_utility",
   "productName": "DYSS DMU Export Utility",
-  "version": "0.3.0",
-  "description": "A utility built to integrate with an existing system by taking the exported data of the existing system and generating graphs, tables, and reports.",
+  "version": "0.9.0",
+  "description": "Receives imported data in the form of a .csv file exported from the DYSS existing system, and parses and processes the datato generate tables, graphs, and information that is useful for the generation of reports.",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
     "build-dll": "cross-env NODE_ENV=development webpack --config ./configs/webpack.config.renderer.dev.dll.babel.js --colors",
@@ -65,7 +65,8 @@
       "app.html",
       "main.prod.js",
       "main.prod.js.map",
-      "package.json"
+      "package.json",
+      "img/"
     ],
     "dmg": {
       "contents": [
@@ -113,18 +114,28 @@
   "author": {
     "name": "Taran Dorland",
     "email": "taran@tarandorland.com",
-    "url": "https://github.com/Taran-Dorland/4000YProject"
+    "url": "https://github.com/Taran-Dorland/"
   },
   "contributors": [
     {
-      "name": "blank",
+      "name": "Kevin",
       "email": "blank@blank.com",
-      "url": "https://blank.com"
+      "url": "https://github.com/kkill323"
+    },
+    {
+      "name": "Nikolas",
+      "email": "blank@blank.com",
+      "url": "https://github.com/nikolasgordon"
+    },
+    {
+      "name": "Shushmita",
+      "email": "blank@blank.com",
+      "url": "https://github.com/SDas-Student"
     }
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues"
+    "url": "https://github.com/Taran-Dorland/4000YProject"
   },
   "keywords": [
     "electron",
@@ -137,7 +148,7 @@
     "hot",
     "reload"
   ],
-  "homepage": "https://github.com/electron-react-boilerplate/electron-react-boilerplate#readme",
+  "homepage": "https://github.com/Taran-Dorland/4000YProject",
   "jest": {
     "testURL": "http://localhost/",
     "moduleNameMapper": {
@@ -266,13 +277,16 @@
     "@nivo/colors": "^0.61.0",
     "@nivo/core": "^0.61.0",
     "@nivo/line": "^0.61.1",
-    "antd": "^3.23.6",
+    "@nivo/pie": "^0.61.1",
+    "antd": "^3.26.9",
     "connected-react-router": "^6.6.0",
     "devtron": "^1.4.0",
     "electron-debug": "^3.0.1",
     "electron-log": "^4.0.0",
     "electron-updater": "^4.2.0",
     "history": "^4.10.1",
+    "html2canvas": "^1.0.0-rc.5",
+    "jspdf": "^1.5.3",
     "react": "^16.12.0",
     "react-csv": "^1.1.1",
     "react-csv-reader": "^2.0.2",
@@ -281,6 +295,7 @@
     "react-redux": "^7.1.3",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
+    "react-switch": "^5.0.1",
     "react-to-pdf": "^0.0.8",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
