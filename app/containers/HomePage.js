@@ -1,3 +1,25 @@
+/*  COIS-4000Y Final Project - DYSS DMU Extension Utility
+    Name: DYSS DMU Extension Utility
+    Written by: 
+
+    Purpose: Receives imported data in the form of a .csv file
+             exported from the DYSS existing system, and parses
+             and processes the datato generate tables, graphs, 
+             and information that is useful for the 
+             generation of reports.
+
+    Parameters: N/A
+
+    Required libraries:
+      - Ant Design https://ant.design/docs/react/introduce
+      - React https://reactjs.org/docs/getting-started.html
+      - React boilerplate https://github.com/electron-react-boilerplate/electron-react-boilerplate
+      - Nivo Charts https://github.com/plouc/nivo
+      - React import .csv https://www.npmjs.com/package/react-csv-reader
+      - React to .pdf https://www.npmjs.com/package/react-to-pdf
+
+      :- View package.json for other additional libraries required
+*/
 // @flow
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
