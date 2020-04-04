@@ -12,6 +12,7 @@ export default class NivoBarGraph extends Component<Props> {
 
   addGraph = () => {
     console.log("ON CLICK");
+    alert("Added Bar graph to export");
     this.props.graph(this.GraphObject);
   }
 

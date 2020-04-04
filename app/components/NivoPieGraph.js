@@ -11,6 +11,7 @@ export default class NivoPieGraph extends Component<Props> {
 
   addGraph = () => {
       console.log("ON CLICK");
+      alert("Added Pie graph to export");
       this.props.graph(this.GraphObject);
   }
 

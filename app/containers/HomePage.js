@@ -128,6 +128,7 @@ export default class HomePage extends Component<Props> {
         [csvData[0][2]]: csvData[i][2],
         [csvData[0][3]]: csvData[i][3],
         [csvData[0][4]]: csvData[i][4],
+        [csvData[0][5]]: csvData[i][5],
         "Programs": programs
       });
     }
@@ -226,7 +227,10 @@ export default class HomePage extends Component<Props> {
   }
 
   handleExit = () => {
-    window.close();
+    let r = confirm("Are you sure you want to exit?");
+    if (r == true) {
+      window.close();
+    }
   }
 
   clearData = csvData => {

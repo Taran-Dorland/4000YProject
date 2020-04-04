@@ -21,6 +21,16 @@ export default class QueryTable extends Component<Props> {
                 key: 'name',
             },
             {
+                title: 'Gender',
+                dataIndex: 'gender',
+                key: 'gender',
+            },
+            {
+                title: 'Age',
+                dataIndex: 'age',
+                key: 'age',
+            },
+            {
                 title: 'Programs',
                 dataIndex: 'Programs',
                 key: 'Programs',
@@ -107,6 +117,8 @@ export default class QueryTable extends Component<Props> {
                 if (!names.includes(outputData[i]["Clients"][j]["Client Name"])) {
                     tableObj["key"] = key;
                     tableObj["name"] = outputData[i]["Clients"][j]["Client Name"];
+                    tableObj["gender"] = outputData[i]["Clients"][j]["Gender"];
+                    tableObj["age"] = outputData[i]["Clients"][j]["Age"];
                     tableObj["Programs"] = generatePrograms(outputData[i]["Clients"][j]["Client Name"]);
                     tableObj["tags"] = generateTags(outputData[i]["Clients"][j]["Client Name"]);
                     data.push(tableObj);

@@ -31,6 +31,8 @@ export default class QueryShit extends Component<Props>{
                         var returnObj = {};
 
                         returnObj["Client Name"] = clients[i]["Client Name"];
+                        returnObj["Gender"] = clients[i]["Gender"];
+                        returnObj["Age"] = clients[i]["Age"];
                         returnObj["Program Name"] = clients[i]["Programs"][j]["Name"];
                         returnObj["Hours"] = clients[i]["Programs"][j]["Hours"];
 
@@ -42,7 +44,7 @@ export default class QueryShit extends Component<Props>{
         return returnArr;
     };
 
-    updateShit = () => {
+    updateTable = () => {
 
         var clients = this.CLIENTS;
         var programs = this.PROGRAMS;
@@ -84,7 +86,7 @@ export default class QueryShit extends Component<Props>{
     };
 
     handleData = showData => {
-        this.updateShit();
+        this.updateTable();
         console.log(this.state.tableData);
 
         var btnText = "";
