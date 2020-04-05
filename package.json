@@ -1,7 +1,7 @@
 {
   "name": "dyss_dmu_export_utility",
   "productName": "DYSS DMU Export Utility",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "Receives imported data in the form of a .csv file exported from the DYSS existing system, and parses and processes the datato generate tables, graphs, and information that is useful for the generation of reports.",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
